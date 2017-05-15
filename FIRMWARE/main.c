@@ -108,7 +108,7 @@ int main(void)
 			button_status = gpio_get(PORT_BUTTON, PIN_BUTTON);
 			
 			if (button_status == 0){ // !=
-				//setLED(200,200,200);
+				//setLED(200,200,0);
 				if (button_press_time++ >= BUTTON_PRESS_TIME){
 					button_armed = 1;
 				} else {
@@ -142,12 +142,6 @@ int main(void)
 			}
 			
 			
-			// debug breathe led code
-			/*
-			neuron.potential += 1;
-			if (neuron.potential == 200) neuron.potential = 0;
-			*/
-			
 			if (neuron.potential >= MEMBRANE_THRESHOLD && neuron.state == INTEGRATE){
 				neuron.state = FIRE;
 				neuron.fire_potential = HYPERPOLARIZATION;
@@ -163,7 +157,7 @@ int main(void)
 			if (++decay_time >= DECAY_TIME){
 				decay_time = 0;
 				dendriteDecayStep(&neuron);
-			membraneDecayStep(&neuron);
+				membraneDecayStep(&neuron);
 			}
 
 			neuron.potential = calcNeuronPotential(&neuron);

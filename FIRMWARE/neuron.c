@@ -2,18 +2,9 @@
 #include "neuron.h"
 #include "comm.h"
 
-uint16_t input_pins[11] = {
-    PIN_AXON_IN,
-    PIN_DEND1_EX,
-    PIN_DEND1_IN,
-    PIN_DEND2_EX,
-    PIN_DEND2_IN,
-    PIN_DEND3_EX,
-    PIN_DEND3_IN,
-    PIN_DEND4_EX,
-    PIN_DEND4_IN,
-    PIN_DEND5_EX,
-    PIN_DEND5_IN
+uint16_t input_pins[2] = {
+    PIN_AXON1_IN,
+	PIN_AXON2_IN
 };
 
 void neuronInit(neuron_t *n)
@@ -88,63 +79,7 @@ void checkDendrites(neuron_t * n)
 		
 		if (dendrite_pulse_flag[i] != 0){
 			dendrite_pulse_flag[i] = 0;
-
-			switch (input_pins[i]){
-				case PIN_DEND1_EX:
-					n->dendrites[0].type = EXCITATORY;
-					n->dendrites[0].state = ON;
-					n->dendrites[0].pulse_time = 0;
-					break;
-				case PIN_DEND1_IN:
-					n->dendrites[0].type = INHIBITORY;
-					n->dendrites[0].state = ON;
-					n->dendrites[0].pulse_time = 0;
-					break;
-				case PIN_DEND2_EX:
-					n->dendrites[1].type = EXCITATORY;
-					n->dendrites[1].state = ON;
-					n->dendrites[1].pulse_time = 0;
-					break;
-				case PIN_DEND2_IN:
-					n->dendrites[1].type = INHIBITORY;
-					n->dendrites[1].state = ON;
-					n->dendrites[1].pulse_time = 0;
-					break;
-				/*
-				case PIN_DEND3_EX:
-					n->dendrites[2].type = EXCITATORY;
-					n->dendrites[2].state = ON;
-					n->dendrites[2].pulse_time = 0;
-					break;
-				case PIN_DEND3_IN:
-					n->dendrites[2].type = INHIBITORY;
-					n->dendrites[2].state = ON;
-					n->dendrites[2].pulse_time = 0;
-					break;
-				case PIN_DEND4_EX:
-					n->dendrites[3].type = EXCITATORY;
-					n->dendrites[3].state = ON;
-					n->dendrites[3].pulse_time = 0;
-					break;
-				case PIN_DEND4_IN:
-					n->dendrites[3].type = INHIBITORY;
-					n->dendrites[3].state = ON;
-					n->dendrites[3].pulse_time = 0;
-					break;
-				*/
-				case PIN_DEND5_EX:
-					n->dendrites[4].type = EXCITATORY;
-					n->dendrites[4].state = ON;
-					n->dendrites[4].pulse_time = 0;
-					break;
-				case PIN_DEND5_IN:
-					n->dendrites[4].type = INHIBITORY;
-					n->dendrites[4].state = ON;
-					n->dendrites[4].pulse_time = 0;
-					break;
-				default:
-					break;
-			}
+			
 		}
 	}
 	

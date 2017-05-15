@@ -11,41 +11,26 @@
 #include "comm.h"
 
 #define PORT_LED		GPIOA
-#define PIN_R_LED		GPIO2
-#define PIN_G_LED		GPIO3
-#define PIN_B_LED		GPIO5
+#define PIN_R_LED		GPIO0
+#define PIN_G_LED		GPIO1
+#define PIN_B_LED		GPIO2
 
-#define PORT_IDENTIFY	GPIOA
-#define PIN_IDENTIFY	GPIO13
+#define PORT_IDENTIFY	GPIOB
+#define PIN_IDENTIFY	GPIO0
 
-#define PORT_BUTTON     GPIOA
-#define PIN_BUTTON      GPIO6
+#define PORT_BUTTON     GPIOB
+#define PIN_BUTTON      GPIO1
 
-#define PORT_AXON_IN    GPIOA
-#define PORT_AXON_OUT   GPIOA
-#define PORT_DEND1_EX   GPIOB
-#define PORT_DEND1_IN   GPIOB
-#define PORT_DEND2_EX   GPIOA
-#define PORT_DEND2_IN   GPIOA
-#define PORT_DEND3_EX   GPIOA
-#define PORT_DEND3_IN   GPIOC
-#define PORT_DEND4_EX   GPIOB
-#define PORT_DEND4_IN   GPIOB
-#define PORT_DEND5_EX   GPIOB
-#define PORT_DEND5_IN   GPIOB
+#define PORT_AXON1_IN    GPIOA
+#define PORT_AXON1_EX   GPIOA
+#define PORT_AXON2_IN   GPIOA
+#define PORT_AXON2_EX   GPIOA
 
-#define PIN_AXON_IN     GPIO9
-#define PIN_AXON_OUT    GPIO10
-#define PIN_DEND1_EX    GPIO1
-#define PIN_DEND1_IN    GPIO0
-#define PIN_DEND2_EX    GPIO7
-#define PIN_DEND2_IN    GPIO6
-#define PIN_DEND3_EX    GPIO1
-#define PIN_DEND3_IN    GPIO14
-#define PIN_DEND4_EX    GPIO7
-#define PIN_DEND4_IN    GPIO6
-#define PIN_DEND5_EX    GPIO4
-#define PIN_DEND5_IN    GPIO3
+
+#define PIN_AXON1_IN     GPIO3
+#define PIN_AXON1_EX    GPIO4
+#define PIN_AXON2_IN    GPIO5
+#define PIN_AXON2_EX    GPIO6
 
 
 extern volatile uint8_t main_tick;

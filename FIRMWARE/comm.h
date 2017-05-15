@@ -10,7 +10,7 @@
 
 #include "HAL.h"
 
-#define NUM_INPUTS 11
+#define NUM_INPUTS 2
 #define DEND_PING_TIME		200 // 1000 ms
 #define	NID_PING_TIME		200 // 1000 ms
 #define NID_PING_KEEP_ALIVE     32
@@ -126,15 +126,15 @@ typedef struct{
 } write_buffer_t;
 
 
-extern uint16_t complimentary_pins[11];
+extern uint16_t complimentary_pins[2];
 
-extern volatile uint16_t active_input_pins[11];
+extern volatile uint16_t active_input_pins[2];
 
-extern uint32_t active_input_ports[11];
+extern uint32_t active_input_ports[2];
 
-extern volatile uint16_t active_output_pins[11];
+extern volatile uint16_t active_output_pins[2];
 
-extern uint32_t active_output_ports[11];
+extern uint32_t active_output_ports[2];
 
 // write outputs from message buffer
 
