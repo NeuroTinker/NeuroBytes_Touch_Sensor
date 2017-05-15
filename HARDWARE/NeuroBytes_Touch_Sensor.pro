@@ -37,7 +37,7 @@ SpiceUseNetNumbers=0
 LabSize=60
 [eeschema]
 version=1
-LibDir=../../Products
+LibDir=NeuroBytes_Schematic_Lib
 [eeschema/libraries]
 LibName1=power
 LibName2=device
@@ -68,4 +68,4 @@ LibName26=opto
 LibName27=atmel
 LibName28=contrib
 LibName29=valves
-LibName30=/home/zach/Documents/NeuroTinker/Products/NeuroTinker_schematic_symbols
+LibName30=NeuroTinker_schematic_symbols

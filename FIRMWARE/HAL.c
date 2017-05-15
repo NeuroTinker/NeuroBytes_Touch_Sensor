@@ -1,15 +1,32 @@
+
 #include "HAL.h"
+#include "comm.h"
 
 volatile uint8_t toggle = 0;
-
+volatile uint8_t tick = 0;
+extern volatile uint8_t main_tick = 0;
 
 void clock_setup(void)
 {
 	// STM32F0 command:	rcc_clock_setup_in_hsi_out_48mhz();
 	rcc_set_sysclk_source(RCC_HSI16);
 	rcc_osc_on(RCC_HSI16);
-//	main_tick = 0;
-//	tick = 0;
+}
+
+void sys_tick_handler(void)
+{
+    // gpio_toggle(PORT_AXON_OUT, PIN_AXON_OUT);
+}
+
+void systick_setup(int xms)
+{
+	
+    systick_set_clocksource(STK_CSR_CLKSOURCE_EXT);
+    STK_CVR = 0;
+    systick_set_reload(2000 * xms);
+    systick_counter_enable();
+    systick_interrupt_enable();
+	
 }
 
 void gpio_setup(void)
@@ -19,6 +36,9 @@ void gpio_setup(void)
 	rcc_periph_clock_enable(RCC_GPIOB);
 	rcc_periph_clock_enable(RCC_GPIOC);
 
+	rcc_peripheral_enable_clock(&RCC_APB2ENR, RCC_APB2ENR_SYSCFGEN); // this line took a long time
+
+
 	/*	Set up LED pins, NeuroBytes v1.01:
 		Alternative Function Mode with no pullup/pulldown
 		Output options: push-pull, high speed
@@ -26,41 +46,173 @@ void gpio_setup(void)
 		PIN_G_LED (PA5): AF5, TIM2_CH1
 		PIN_B_LED (PA3): AF2, TIM2_CH4 
 	*/
+	
 	gpio_mode_setup(PORT_LED, GPIO_MODE_AF, GPIO_PUPD_NONE, PIN_R_LED | PIN_G_LED | PIN_B_LED);
 	gpio_set_output_options(PORT_LED, GPIO_OTYPE_PP, GPIO_OSPEED_HIGH, PIN_R_LED | PIN_G_LED | PIN_B_LED);
 	gpio_set_af(PORT_LED, GPIO_AF2, PIN_R_LED | PIN_G_LED);
 	gpio_set_af(PORT_LED, GPIO_AF5, PIN_B_LED);
-
+	
 	/* 
 		Setup axon pins:
 		Axon Excitatory PA10 TIM21_CH1	(temporarily output)
 		Axon Inhibitory PA9  TIM21_CH2	(temporarily input)
 	*/
+	
+	gpio_mode_setup(PORT_AXON_OUT, GPIO_MODE_OUTPUT, GPIO_PUPD_PULLDOWN, PIN_AXON_OUT);
+	gpio_mode_setup(PORT_AXON_IN, GPIO_MODE_INPUT, GPIO_PUPD_NONE, PIN_AXON_IN);
+	
+	setAsInput(PORT_AXON_IN, PIN_AXON_IN);
+	setAsOutput(PORT_AXON_OUT, PIN_AXON_OUT);
+	
+	//gpio_mode_setup(GPIOA, GPIO_MODE_INPUT, GPIO_PUPD_PULLDOWN, GPIO13);
+	
+	gpio_mode_setup(PORT_BUTTON, GPIO_MODE_INPUT, GPIO_PUPD_PULLUP, PIN_BUTTON);
+	
+	/*
+		All dendrites pins are initially set to be inputs.
+		Setup dendrite pins:
+		Dendrite 1 Excit/Inhib-- PB0/PB1 
+	*/
+	/*
+	setAsInput(PORT_DEND1_EX, PIN_DEND1_EX);
+	setAsInput(PORT_DEND1_IN, PIN_DEND1_IN);
+	setAsInput(PORT_DEND2_EX, PIN_DEND2_EX);
+	setAsInput(PORT_DEND2_IN, PIN_DEND2_IN);
+	
+	setAsInput(PORT_DEND3_EX, PIN_DEND3_EX);
+	setAsInput(PORT_DEND3_IN, PIN_DEND3_IN);
+	setAsInput(PORT_DEND4_EX, PIN_DEND4_EX);
+	setAsInput(PORT_DEND4_IN, PIN_DEND4_IN);
+	
+	setAsInput(PORT_DEND5_EX, PIN_DEND5_EX);
+	setAsInput(GPIOB, EXTI3);
 
-	gpio_mode_setup(GPIOA, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO10);
+	// temp NID interface w/ clk
+	setAsOutput(PORT_DEND3_IN, PIN_DEND3_IN);
+	setAsOutput(PORT_DEND2_IN, PIN_DEND2_IN);
 
+	//MMIO32(SYSCFG_BASE + 0x08) |= 0b0001 << 12;
+	*/
+	
+	nvic_enable_irq(NVIC_EXTI0_1_IRQ);
+	nvic_enable_irq(NVIC_EXTI2_3_IRQ);
+	nvic_enable_irq(NVIC_EXTI4_15_IRQ);
 
+	nvic_set_priority(NVIC_EXTI0_1_IRQ, 0);
+	nvic_set_priority(NVIC_EXTI2_3_IRQ, 0);
+	nvic_set_priority(NVIC_EXTI4_15_IRQ, 0);
+	
+	//MMIO32(SYSCFG_BASE + 0x0c) = 0b0101 << 12;
+
+	//MMIO32((EXTI_BASE) + 0x14) |= (1<<1);
+}
+
+void setAsInput(uint32_t port, uint32_t pin)
+{
+	// setup gpio as an input pin
+	gpio_mode_setup(port, GPIO_MODE_INPUT, GPIO_PUPD_PULLDOWN, pin);
+
+	// setup interrupt for the pin going high
+	exti_select_source(pin, port);
+	exti_set_trigger(pin, EXTI_TRIGGER_RISING);
+	exti_enable_request(pin);
+	exti_reset_request(pin);
+}
+
+void setAsOutput(uint32_t port, uint32_t pin)
+{
+	// disable input interrupts
+	exti_disable_request(pin);
+
+	// setup gpio as an output pin. pulldown
+	gpio_mode_setup(port, GPIO_MODE_OUTPUT, GPIO_PUPD_PULLDOWN, pin);
+}
+
+// working interrupt pins: 0,1,3,4,6,7
+
+/*
+	Each input's ISR tells the communications program that the input is active (getting a message).
+	For dendrite inputs, the ISR also tells the neuron program if the input is excitatory or inhibitory and then toggles input/output
+*/
+
+void exti0_1_isr(void)
+{
+	// interrupt handler for pins 0,1
+	//setLED(0,200,200);
+	if ((EXTI_PR & PIN_DEND1_IN) != 0){
+		active_input_pins[2] = PIN_DEND1_IN;
+		EXTI_PR |= PIN_DEND1_IN; // clear interrupt flag
+		//EXTI_PR &= ~(PIN_DEND1_IN);
+	} else if ((EXTI_PR & PIN_DEND1_EX) != 0){
+		active_input_pins[1] = PIN_DEND1_EX;
+		EXTI_PR |= PIN_DEND1_EX;
+		//EXTI_PR &= ~(PIN_DEND1_EX);
+	}
+}
+
+void exti2_3_isr(void)
+{
+	// interrupt handler for pins 2,3
+	//setLED(200,0,0);
+	//gpio_toggle(PORT_AXON_OUT, PIN_AXON_OUT);
+	if ((EXTI_PR & PIN_DEND5_IN) != 0){
+		//setLED(200,0,200);
+		//gpio_toggle(PORT_AXON_OUT, PIN_AXON_OUT);
+		active_input_pins[10] = PIN_DEND5_IN;
+		EXTI_PR |= EXTI3;
+	}
+}
+
+void exti4_15_isr(void)
+{
+	// interrupt handler for pins 4-15
+	//setLED(0,0,200);
+	//gpio_toggle(PORT_AXON_OUT, PIN_AXON_OUT);
+	if ((EXTI_PR & PIN_DEND5_EX) != 0){
+		//gpio_toggle(PORT_AXON_OUT, PIN_AXON_OUT);
+		active_input_pins[9] = PIN_DEND5_EX;
+		EXTI_PR |= PIN_DEND5_EX;
+	} else if ((EXTI_PR & PIN_DEND2_IN) != 0){
+		active_input_pins[4] = PIN_DEND2_IN;
+		EXTI_PR |= PIN_DEND2_IN;
+	} else if ((EXTI_PR & PIN_DEND2_EX) != 0){
+		active_input_pins[3] = PIN_DEND2_EX;
+		EXTI_PR |= PIN_DEND2_EX;
+	} else if ((EXTI_PR & PIN_AXON_IN) != 0){
+		active_input_pins[0] = PIN_AXON_IN;
+		EXTI_PR |= PIN_AXON_IN;
+	}
 }
 
 void tim_setup(void)
 {
 	/* 	Enable and reset TIM2 clock */
 	rcc_periph_clock_enable(RCC_TIM2);
-	timer_reset(TIM2);
+	//timer_reset(TIM2);
 
 	// Setup TIM2 interrupts	rcc_set_sysclk_source(RCC_HSI16);
-//	rcc_osc_on(RCC_HSI16);
-//	nvic_enable_irq(NVIC_TIM2_IRQ);
+	nvic_enable_irq(NVIC_TIM2_IRQ);
+	//nvic_set_priority(NVIC_TIM2_IRQ, 2);
 	//rcc_periph_reset_pulse(RST_TIM2);
 
 	/* 	Set up TIM2 mode to no clock divider ratio, edge alignment, and up direction */
 	timer_set_mode(TIM2, TIM_CR1_CKD_CK_INT, TIM_CR1_CMS_EDGE, TIM_CR1_DIR_UP);
 
+	// test commands
+	//timer_disable_preload(TIM2);
+	//timer_continuous_mode(TIM2);
+	//TIM_CR1(TIM2) |= TIM_CR1_CEN;
+	//TIM2_EGR |= TIM_EGR_UG;
+	//timer_update_on_any(TIM2);
+
+
 	/*	Set prescaler to 0: 16 MHz clock */
-	timer_set_prescaler(TIM2, 0);
+	timer_set_prescaler(TIM2, 1);
 
 	/* 	Set timer period to 9600: 5 kHz PWM with 9600 steps */
 	timer_set_period(TIM2, 9600);
+
+	
 
 	// 	Set TIM2 Output Compare mode to PWM1 on channels 1, 3, and 4 (NeuroBytes v1.01) 
 	timer_set_oc_mode(TIM2, TIM_OC1, TIM_OCM_PWM1);
@@ -76,65 +228,84 @@ void tim_setup(void)
 	timer_enable_oc_output(TIM2, TIM_OC1);
 	timer_enable_oc_output(TIM2, TIM_OC3);
 	timer_enable_oc_output(TIM2, TIM_OC4);
-
+	
 
 	/*	Enable counter */
 	timer_enable_counter(TIM2);
 
 	// Enable TIM2 interrupts (600 us)
-//	timer_enable_irq(TIM2, TIM_DIER_CC1IE);
+	timer_enable_irq(TIM2, TIM_DIER_UIE);
 
-	/*	Enable and reset TIM21: */
+	// setup TIM21
+
 	MMIO32((RCC_BASE) + 0x34) |= (1<<2); //Enable TIM21
-	MMIO32((RCC_BASE) + 0x24) |= (1<<2); //Set reset bit, TIM21
-	MMIO32((RCC_BASE) + 0x24) &= ~(1<<2); //Clear reset bit, TIM21
+    MMIO32((RCC_BASE) + 0x24) |= (1<<2); //Set reset bit, TIM21
+    MMIO32((RCC_BASE) + 0x24) &= ~(1<<2); //Clear reset bit, TIM21
 
-	/*	TIM21 control register 1 (TIMx_CR1): */
-	MMIO32((TIM21_BASE) + 0x00) &= ~((1<<5) | (1<<6)); //Edge-aligned (default setting)
-	MMIO32((TIM21_BASE) + 0x00) &= ~((1<<9) | (1<<10)); //No clock division (default setting)
-	MMIO32((TIM21_BASE) + 0x00) &= ~(1<<4); //Up direction (default setting)
-			
-	/*	TIM21 interrupt enable register (TIMx_DIER): */
-	MMIO32((TIM21_BASE) + 0x0C) |= (1<<0); //Enable update interrupts
+    /*    TIM21 control register 1 (TIMx_CR1): */
+    MMIO32((TIM21_BASE) + 0x00) &= ~((1<<5) | (1<<6)); //Edge-aligned (default setting)
+    MMIO32((TIM21_BASE) + 0x00) &= ~((1<<9) | (1<<10)); //No clock division (default setting)
+    MMIO32((TIM21_BASE) + 0x00) &= ~(1<<4); //Up direction (default setting)
+           
+    /*    TIM21 interrupt enable register (TIMx_DIER): */
+    MMIO32((TIM21_BASE) + 0x0C) |= (1<<0); //Enable update interrupts
 
-	/*	TIM21 prescaler (TIMx_PSC): */
-	MMIO32((TIM21_BASE) + 0x28) = 7; //prescaler = clk/8 (see datasheet, they add one for convenience)
+    /*    TIM21 prescaler (TIMx_PSC): */
+    MMIO32((TIM21_BASE) + 0x28) = 7; //prescaler = clk/8 (see datasheet, they add one for convenience)
 
-	/*	TIM21 auto-reload register (TIMx_ARR): */
-	MMIO32((TIM21_BASE) + 0x2C) = 200; //100 us interrupts (with clk/8 prescaler)
-	
-	/*	Enable TIM21 counter: */
-	MMIO32((TIM21_BASE) + 0x00) |= (1<<0);
-}
+    /*    TIM21 auto-reload register (TIMx_ARR): */
+    MMIO32((TIM21_BASE) + 0x2C) = 200; //100 us interrupts (with clk/8 prescaler)
+   
+    /*    Enable TIM21 counter: */
+    MMIO32((TIM21_BASE) + 0x00) |= (1<<0);
 
-void nvic_setup(void) 
-{
 	nvic_enable_irq(NVIC_TIM21_IRQ);
-	nvic_set_priority(NVIC_TIM21_IRQ, 1);
-
+    nvic_set_priority(NVIC_TIM21_IRQ, 1);
 }
+
 
 void tim21_isr(void)
 {
-	//gpio_toggle(GPIOA, GPIO10);	
-	MMIO32((TIM21_BASE) + 0x10) &= ~(1<<0); //clear the interrupt register
+	/*
+		TIM21 is the communication clock. 
+		Each interrupt is one read and write of gpios.
+		Interrupts occur every 100 us.
+	*/
+
+	if (++tick >= 50){
+		main_tick = 1;
+		tick = 0;
+	}
+
+	readInputs();
+	write();
+
+	// temp NID debug clk
+	//gpio_toggle(PORT_DEND3_IN, PIN_DEND3_IN);
+
+	/*
+	if (write_count == 0){
+		if (downstream_write_buffer_ready != 0){
+			writeDownstream();
+		} else if (nid_write_buffer_ready != 0){
+			writeNID();
+		}
+	}
+	*/
+	
+    MMIO32((TIM21_BASE) + 0x10) &= ~(1<<0); //clear the interrupt register
 }
 
-void sys_tick_handler(void)
+void tim2_isr(void)
 {
-	gpio_toggle(GPIOA, GPIO10);
+	
+	if (timer_get_flag(TIM2, TIM_SR_UIF)){
+		timer_clear_flag(TIM2, TIM_SR_UIF);
+	}
+	
 }
 
-void systick_setup(int xms)
-{
-	systick_set_clocksource(STK_CSR_CLKSOURCE_EXT);
-	STK_CVR = 0;
-	systick_set_reload(2000 * xms);
-	systick_counter_enable();
-	systick_interrupt_enable();
-}
-
-void LEDfullWhite(void) 
+void LEDFullWhite(void) 
 {
 	timer_set_oc_value(TIM2, TIM_OC1, 9600);
 	timer_set_oc_value(TIM2, TIM_OC3, 9600);
