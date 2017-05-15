@@ -29,7 +29,6 @@ LIBS:atmel
 LIBS:contrib
 LIBS:valves
 LIBS:NeuroTinker_schematic_symbols
-LIBS:NeuroBytes_Touch_Sensor-cache
 EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
@@ -107,32 +106,20 @@ Wire Wire Line
 	5200 1800 5400 1800
 Text GLabel 5400 2250 2    60   Input ~ 0
 NSS
-Text GLabel 2600 3000 0    60   Input ~ 0
-LED_B
 Text GLabel 2600 2550 0    60   Input ~ 0
+LED_B
+Text GLabel 2600 2400 0    60   Input ~ 0
 LED_G
-Text GLabel 2600 2700 0    60   Input ~ 0
+Text GLabel 2600 2250 0    60   Input ~ 0
 LED_R
-Wire Wire Line
-	2600 2550 2800 2550
-Text GLabel 5400 3450 2    60   Input ~ 0
-D1EX
 Wire Wire Line
 	6200 3300 6200 3850
 Wire Wire Line
-	2600 2700 2800 2700
-Wire Wire Line
 	5200 3450 5400 3450
-Text GLabel 5400 3000 2    60   Input ~ 0
-AIN
-Text GLabel 5400 2850 2    60   Input ~ 0
-AEX
-Wire Wire Line
-	5200 3000 5400 3000
-Wire Wire Line
-	5200 2850 5400 2850
-Wire Wire Line
-	5200 2700 5400 2700
+Text GLabel 2600 2700 0    60   Input ~ 0
+A1IN
+Text GLabel 2600 2850 0    60   Input ~ 0
+A1EX
 Wire Wire Line
 	5200 2250 5400 2250
 $Comp
@@ -173,8 +160,6 @@ Wire Wire Line
 	9300 2650 9500 2650
 Text GLabel 6750 2650 0    60   Input ~ 0
 LED_B
-Wire Wire Line
-	7300 2650 7750 2650
 Text GLabel 6750 1850 0    60   Input ~ 0
 LED_G
 Text GLabel 6750 1450 0    60   Input ~ 0
@@ -237,20 +222,15 @@ F 5 "Yes" H 5100 5500 60  0001 C CNN "RoHS"
 	1    0    0    -1  
 $EndComp
 Text GLabel 3800 5100 0    60   Input ~ 0
-AEX
+A1EX
 Text GLabel 3800 4900 0    60   Input ~ 0
-AIN
+A1IN
 Wire Wire Line
 	3800 5100 4900 5100
 Wire Wire Line
 	4300 5000 4900 5000
 Wire Wire Line
-	4300 4900 4300 5550
-Wire Wire Line
 	3800 4900 4300 4900
-Wire Wire Line
-	4300 5550 4900 5550
-Connection ~ 4300 5000
 Wire Wire Line
 	4500 5450 4900 5450
 Wire Wire Line
@@ -263,11 +243,6 @@ Wire Wire Line
 	4700 4800 4700 5950
 Wire Wire Line
 	4700 4800 4900 4800
-Wire Wire Line
-	4100 5100 4100 5650
-Wire Wire Line
-	4100 5650 4900 5650
-Connection ~ 4100 5100
 $Comp
 L STM32L011Gx U1
 U 1 1 58B5C156
@@ -613,13 +588,9 @@ Wire Wire Line
 Wire Wire Line
 	7650 2050 7750 2050
 Wire Wire Line
-	7300 1850 7750 1850
-Wire Wire Line
 	8600 2050 8600 2450
 Wire Wire Line
 	8600 2050 8250 2050
-Wire Wire Line
-	2600 3000 2800 3000
 Wire Wire Line
 	2000 1000 2000 2100
 Wire Wire Line
@@ -630,10 +601,8 @@ Text GLabel 2350 3750 2    60   Input ~ 0
 IDENTIFY
 Wire Wire Line
 	2350 3750 2150 3750
-Text GLabel 5400 2700 2    60   Input ~ 0
+Text GLabel 2600 3450 0    60   Input ~ 0
 IDENTIFY
-Wire Wire Line
-	6750 1850 7000 1850
 $Comp
 L GND #PWR015
 U 1 1 58B73CAC
@@ -682,10 +651,8 @@ Wire Wire Line
 	1300 4500 1550 4500
 Wire Wire Line
 	2150 4500 2350 4500
-Text GLabel 2600 3150 0    60   Input ~ 0
+Text GLabel 5400 3450 2    60   Input ~ 0
 INPUT
-Wire Wire Line
-	2600 3150 2800 3150
 $Comp
 L R R4
 U 1 1 58D1B582
@@ -716,47 +683,6 @@ Wire Wire Line
 	950  2650 950  1500
 Wire Wire Line
 	950  1500 2300 1500
-$Comp
-L R R5
-U 1 1 58D96A7D
-P 7150 1850
-F 0 "R5" V 7230 1850 50  0000 C CNN
-F 1 "R" V 7150 1850 50  0000 C CNN
-F 2 "KiCad_Footprints:ZF_SMD_NonPol_0402" V 7080 1850 50  0001 C CNN
-F 3 "" H 7150 1850 50  0000 C CNN
-F 4 "No" H 7150 1850 60  0001 C CNN "Subs Allowed"
-F 5 "Yes" H 7150 1850 60  0001 C CNN "RoHS"
-	1    7150 1850
-	0    1    1    0   
-$EndComp
-$Comp
-L R R6
-U 1 1 58D96B4C
-P 7150 1450
-F 0 "R6" V 7230 1450 50  0000 C CNN
-F 1 "R" V 7150 1450 50  0000 C CNN
-F 2 "KiCad_Footprints:ZF_SMD_NonPol_0402" V 7080 1450 50  0001 C CNN
-F 3 "" H 7150 1450 50  0000 C CNN
-F 4 "No" H 7150 1450 60  0001 C CNN "Subs Allowed"
-F 5 "Yes" H 7150 1450 60  0001 C CNN "RoHS"
-	1    7150 1450
-	0    1    1    0   
-$EndComp
-$Comp
-L R R7
-U 1 1 58D96BB5
-P 7150 2650
-F 0 "R7" V 7230 2650 50  0000 C CNN
-F 1 "R" V 7150 2650 50  0000 C CNN
-F 2 "KiCad_Footprints:ZF_SMD_NonPol_0402" V 7080 2650 50  0001 C CNN
-F 3 "" H 7150 2650 50  0000 C CNN
-F 4 "No" H 7150 2650 60  0001 C CNN "Subs Allowed"
-F 5 "Yes" H 7150 2650 60  0001 C CNN "RoHS"
-	1    7150 2650
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	7000 2650 6750 2650
 Wire Wire Line
 	1300 3750 1300 5000
 $Comp
@@ -772,10 +698,6 @@ F 3 "" H 1300 5000 50  0000 C CNN
 $EndComp
 Connection ~ 1300 4500
 Wire Wire Line
-	6750 1450 7000 1450
-Wire Wire Line
-	7300 1450 7750 1450
-Wire Wire Line
 	7750 1650 7650 1650
 Connection ~ 7650 2050
 Wire Wire Line
@@ -786,4 +708,83 @@ Wire Wire Line
 	8750 2250 9000 2250
 Wire Wire Line
 	8600 2450 9000 2450
+$Comp
+L R_Pack04 RN1
+U 1 1 590B998A
+P 7150 1950
+F 0 "RN1" V 6850 1950 50  0000 C CNN
+F 1 "R_Pack04" V 7350 1950 50  0000 C CNN
+F 2 "KiCad_Footprints:ZF_RN_4iso_CTS-0804" H 7425 1950 50  0001 C CNN
+F 3 "" H 7150 1950 50  0000 C CNN
+F 4 "No" H 7150 1950 60  0001 C CNN "Subs Allowed"
+F 5 "Yes" H 7150 1950 60  0001 C CNN "RoHS"
+	1    7150 1950
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	6750 1850 6950 1850
+Wire Wire Line
+	6750 1450 6850 1450
+Wire Wire Line
+	6850 1450 6850 1750
+Wire Wire Line
+	6850 1750 6950 1750
+Wire Wire Line
+	6750 2650 6850 2650
+Wire Wire Line
+	6850 2650 6850 1950
+Wire Wire Line
+	6850 1950 6950 1950
+Wire Wire Line
+	7350 1950 7450 1950
+Wire Wire Line
+	7450 1950 7450 2650
+Wire Wire Line
+	7450 2650 7750 2650
+Wire Wire Line
+	4300 4900 4300 5000
+Text GLabel 3800 5650 0    60   Input ~ 0
+A2EX
+Text GLabel 3800 5450 0    60   Input ~ 0
+A2IN
+Wire Wire Line
+	3800 5650 4900 5650
+Wire Wire Line
+	3800 5450 4300 5450
+Wire Wire Line
+	4300 5450 4300 5550
+Wire Wire Line
+	4300 5550 4900 5550
+Wire Wire Line
+	2600 2550 2800 2550
+Wire Wire Line
+	2600 2400 2800 2400
+Wire Wire Line
+	2600 2250 2800 2250
+Wire Wire Line
+	7350 1850 7450 1850
+Wire Wire Line
+	7450 1850 7450 1450
+Wire Wire Line
+	7450 1450 7750 1450
+Wire Wire Line
+	7350 1750 7550 1750
+Wire Wire Line
+	7550 1750 7550 1850
+Wire Wire Line
+	7550 1850 7750 1850
+Wire Wire Line
+	2800 2700 2600 2700
+Wire Wire Line
+	2600 2850 2800 2850
+Text GLabel 2600 3150 0    60   Input ~ 0
+A2EX
+Wire Wire Line
+	2600 3150 2800 3150
+Text GLabel 2600 3000 0    60   Input ~ 0
+A2IN
+Wire Wire Line
+	2600 3000 2800 3000
+Wire Wire Line
+	2600 3450 2800 3450
 $EndSCHEMATC

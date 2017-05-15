@@ -1,4 +1,4 @@
-update=Mon 27 Mar 2017 02:18:05 PM CDT
+update=Mon 15 May 2017 12:46:30 PM CDT
 version=1
 last_client=kicad
 [pcbnew]
@@ -37,7 +37,7 @@ SpiceUseNetNumbers=0
 LabSize=60
 [eeschema]
 version=1
-LibDir=NeuroBytes_Schematic_Lib
+LibDir=../../Products
 [eeschema/libraries]
 LibName1=power
 LibName2=device
@@ -68,4 +68,4 @@ LibName26=opto
 LibName27=atmel
 LibName28=contrib
 LibName29=valves
-LibName30=NeuroTinker_schematic_symbols
+LibName30=NeuroBytes_Schematic_Lib/NeuroTinker_schematic_symbols
