@@ -29,16 +29,17 @@ LIBS:atmel
 LIBS:contrib
 LIBS:valves
 LIBS:NeuroTinker_schematic_symbols
+LIBS:NeuroBytes_Touch_Sensor-cache
 EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
 Sheet 1 1
-Title "NeuroBytes v1.01 Board"
-Date "2017-03-01"
-Rev "v1.01"
+Title "NeuroBytes Touch Sensor"
+Date "2017-05-16"
+Rev "B"
 Comp "NeuroTinker, LLC"
-Comment1 "Ordered 18 boards 3/1/2017"
+Comment1 "License: GPL v3"
 Comment2 ""
 Comment3 ""
 Comment4 ""
@@ -63,10 +64,10 @@ L C C3
 U 1 1 58B4A97E
 P 7050 3800
 F 0 "C3" H 7075 3900 50  0000 L CNN
-F 1 "C" H 7075 3700 50  0000 L CNN
+F 1 "100 nF" H 7075 3700 50  0000 L CNN
 F 2 "KiCad_Footprints:ZF_SMD_NonPol_0402_cap" H 8000 3800 50  0001 C CNN
 F 3 "" H 7050 3800 50  0000 C CNN
-F 4 "No" H 7050 3800 60  0001 C CNN "Subs Allowed"
+F 4 "Yes" H 7050 3800 60  0001 C CNN "Subs Allowed"
 F 5 "Yes" H 7050 3800 60  0001 C CNN "RoHS"
 	1    7050 3800
 	1    0    0    -1  
@@ -116,16 +117,10 @@ Wire Wire Line
 	6200 3300 6200 3850
 Wire Wire Line
 	5200 3450 5400 3450
-Text GLabel 5400 3000 2    60   Input ~ 0
+Text GLabel 2600 2700 0    60   Input ~ 0
 A1IN
-Text GLabel 5400 2850 2    60   Input ~ 0
+Text GLabel 2600 2850 0    60   Input ~ 0
 A1EX
-Wire Wire Line
-	5200 3000 5400 3000
-Wire Wire Line
-	5200 2850 5400 2850
-Wire Wire Line
-	5200 2700 5400 2700
 Wire Wire Line
 	5200 2250 5400 2250
 $Comp
@@ -280,10 +275,10 @@ L C C1
 U 1 1 58B5CACA
 P 6350 5150
 F 0 "C1" H 6375 5250 50  0000 L CNN
-F 1 "C" H 6375 5050 50  0000 L CNN
+F 1 "1 uF" H 6375 5050 50  0000 L CNN
 F 2 "KiCad_Footprints:ZF_SMD_NonPol_0603" H 6388 5000 50  0001 C CNN
 F 3 "" H 6350 5150 50  0000 C CNN
-F 4 "No" H 6350 5150 60  0001 C CNN "Subs Allowed"
+F 4 "Yes" H 6350 5150 60  0001 C CNN "Subs Allowed"
 F 5 "Yes" H 6350 5150 60  0001 C CNN "RoHS"
 	1    6350 5150
 	1    0    0    -1  
@@ -356,10 +351,10 @@ L C C4
 U 1 1 58B5D1F9
 P 8000 5150
 F 0 "C4" H 8025 5250 50  0000 L CNN
-F 1 "C" H 8025 5050 50  0000 L CNN
+F 1 "1 uF" H 8025 5050 50  0000 L CNN
 F 2 "KiCad_Footprints:ZF_SMD_NonPol_0603" H 8038 5000 50  0001 C CNN
 F 3 "" H 8000 5150 50  0000 C CNN
-F 4 "No" H 8000 5150 60  0001 C CNN "Subs Allowed"
+F 4 "Yes" H 8000 5150 60  0001 C CNN "Subs Allowed"
 F 5 "Yes" H 8000 5150 60  0001 C CNN "RoHS"
 	1    8000 5150
 	1    0    0    -1  
@@ -427,10 +422,10 @@ L CP C2
 U 1 1 58B5DAAA
 P 6750 3800
 F 0 "C2" H 6775 3900 50  0000 L CNN
-F 1 "CP" H 6775 3700 50  0000 L CNN
+F 1 "10 uF" H 6775 3700 50  0000 L CNN
 F 2 "KiCad_Footprints:ZF_SMD_pol_1206" H 5900 3800 50  0001 C CNN
 F 3 "" H 6750 3800 50  0000 C CNN
-F 4 "No" H 6750 3800 60  0001 C CNN "Subs Allowed"
+F 4 "Yes" H 6750 3800 60  0001 C CNN "Subs Allowed"
 F 5 "Yes" H 6750 3800 60  0001 C CNN "RoHS"
 	1    6750 3800
 	1    0    0    -1  
@@ -542,10 +537,10 @@ L R R1
 U 1 1 58B5C233
 P 9150 2250
 F 0 "R1" V 9230 2250 50  0000 C CNN
-F 1 "R" V 9150 2250 50  0000 C CNN
+F 1 "150" V 9150 2250 50  0000 C CNN
 F 2 "KiCad_Footprints:ZF_SMD_NonPol_0402" V 9350 1650 50  0001 C CNN
 F 3 "" H 9150 2250 50  0000 C CNN
-F 4 "No" H 9150 2250 60  0001 C CNN "Subs Allowed"
+F 4 "Yes" H 9150 2250 60  0001 C CNN "Subs Allowed"
 F 5 "Yes" H 9150 2250 60  0001 C CNN "RoHS"
 	1    9150 2250
 	0    1    1    0   
@@ -555,10 +550,10 @@ L R R2
 U 1 1 58B5C2BE
 P 9150 2450
 F 0 "R2" V 9230 2450 50  0000 C CNN
-F 1 "R" V 9150 2450 50  0000 C CNN
+F 1 "100" V 9150 2450 50  0000 C CNN
 F 2 "KiCad_Footprints:ZF_SMD_NonPol_0402" V 9350 1850 50  0001 C CNN
 F 3 "" H 9150 2450 50  0000 C CNN
-F 4 "No" H 9150 2450 60  0001 C CNN "Subs Allowed"
+F 4 "Yes" H 9150 2450 60  0001 C CNN "Subs Allowed"
 F 5 "Yes" H 9150 2450 60  0001 C CNN "RoHS"
 	1    9150 2450
 	0    1    1    0   
@@ -568,10 +563,10 @@ L R R3
 U 1 1 58B5C32A
 P 9150 2650
 F 0 "R3" V 9230 2650 50  0000 C CNN
-F 1 "R" V 9150 2650 50  0000 C CNN
+F 1 "100" V 9150 2650 50  0000 C CNN
 F 2 "KiCad_Footprints:ZF_SMD_NonPol_0402" V 9350 2050 50  0001 C CNN
 F 3 "" H 9150 2650 50  0000 C CNN
-F 4 "No" H 9150 2650 60  0001 C CNN "Subs Allowed"
+F 4 "Yes" H 9150 2650 60  0001 C CNN "Subs Allowed"
 F 5 "Yes" H 9150 2650 60  0001 C CNN "RoHS"
 	1    9150 2650
 	0    1    1    0   
@@ -607,7 +602,7 @@ Text GLabel 2350 3750 2    60   Input ~ 0
 IDENTIFY
 Wire Wire Line
 	2350 3750 2150 3750
-Text GLabel 5400 2700 2    60   Input ~ 0
+Text GLabel 2600 3450 0    60   Input ~ 0
 IDENTIFY
 $Comp
 L GND #PWR015
@@ -626,10 +621,10 @@ L C C5
 U 1 1 58B73F8A
 P 1800 2300
 F 0 "C5" H 1825 2400 50  0000 L CNN
-F 1 "C" H 1825 2200 50  0000 L CNN
+F 1 "100 nF" H 1825 2200 50  0000 L CNN
 F 2 "KiCad_Footprints:ZF_SMD_NonPol_0402_cap" H 1838 2150 50  0001 C CNN
 F 3 "" H 1800 2300 50  0000 C CNN
-F 4 "No" H 1800 2300 60  0001 C CNN "Subs Allowed"
+F 4 "Yes" H 1800 2300 60  0001 C CNN "Subs Allowed"
 F 5 "Yes" H 1800 2300 60  0001 C CNN "RoHS"
 	1    1800 2300
 	1    0    0    -1  
@@ -664,10 +659,10 @@ L R R4
 U 1 1 58D1B582
 P 2450 1500
 F 0 "R4" V 2530 1500 50  0000 C CNN
-F 1 "R" V 2450 1500 50  0000 C CNN
+F 1 "JMP" V 2450 1500 50  0000 C CNN
 F 2 "KiCad_Footprints:ZF_SMD_NonPol_0402" V 2380 1500 50  0001 C CNN
 F 3 "" H 2450 1500 50  0000 C CNN
-F 4 "No" H 2450 1500 60  0001 C CNN "Subs Allowed"
+F 4 "Yes" H 2450 1500 60  0001 C CNN "Subs Allowed"
 F 5 "Yes" H 2450 1500 60  0001 C CNN "RoHS"
 	1    2450 1500
 	0    -1   -1   0   
@@ -719,10 +714,10 @@ L R_Pack04 RN1
 U 1 1 590B998A
 P 7150 1950
 F 0 "RN1" V 6850 1950 50  0000 C CNN
-F 1 "R_Pack04" V 7350 1950 50  0000 C CNN
+F 1 "1k x4" V 7350 1950 50  0000 C CNN
 F 2 "KiCad_Footprints:ZF_RN_4iso_CTS-0804" H 7425 1950 50  0001 C CNN
 F 3 "" H 7150 1950 50  0000 C CNN
-F 4 "No" H 7150 1950 60  0001 C CNN "Subs Allowed"
+F 4 "Yes" H 7150 1950 60  0001 C CNN "Subs Allowed"
 F 5 "Yes" H 7150 1950 60  0001 C CNN "RoHS"
 	1    7150 1950
 	0    1    1    0   
@@ -779,4 +774,18 @@ Wire Wire Line
 	7550 1750 7550 1850
 Wire Wire Line
 	7550 1850 7750 1850
+Wire Wire Line
+	2800 2700 2600 2700
+Wire Wire Line
+	2600 2850 2800 2850
+Text GLabel 2600 3150 0    60   Input ~ 0
+A2EX
+Wire Wire Line
+	2600 3150 2800 3150
+Text GLabel 2600 3000 0    60   Input ~ 0
+A2IN
+Wire Wire Line
+	2600 3000 2800 3000
+Wire Wire Line
+	2600 3450 2800 3450
 $EndSCHEMATC
