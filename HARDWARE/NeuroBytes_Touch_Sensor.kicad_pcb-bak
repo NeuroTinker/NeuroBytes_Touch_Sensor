@@ -74,7 +74,7 @@
     (grid_origin 84 105)
     (visible_elements FFFFFF7F)
     (pcbplotparams
-      (layerselection 0x111fc_80000001)
+      (layerselection 0x311fc_80000001)
       (usegerberextensions false)
       (excludeedgelayer true)
       (linewidth 0.100000)
@@ -97,7 +97,7 @@
       (mirror false)
       (drillshape 0)
       (scaleselection 1)
-      (outputdirectory ""))
+      (outputdirectory Gerbers/))
   )
 
   (net 0 "")
