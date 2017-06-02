@@ -2,7 +2,7 @@
 <export version="D">
   <design>
     <source>/home/zach/Documents/NeuroTinker/Products/NeuroBytes_Touch_Sensor/HARDWARE/NeuroBytes_Touch_Sensor.sch</source>
-    <date>Tue 16 May 2017 06:18:03 PM CDT</date>
+    <date>Wed 31 May 2017 08:10:38 PM CDT</date>
     <tool>Eeschema 4.0.5-e0-6337~49~ubuntu14.04.1</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
@@ -23,6 +23,8 @@
       <value>100 nF</value>
       <footprint>KiCad_Footprints:ZF_SMD_NonPol_0402_cap</footprint>
       <fields>
+        <field name="Mfr Part #">MF-CAP-0402-0.1uF</field>
+        <field name="Package">C0402</field>
         <field name="Subs Allowed">Yes</field>
         <field name="RoHS">Yes</field>
       </fields>
@@ -34,6 +36,8 @@
       <value>LED_RABG</value>
       <footprint>KiCad_Footprints:ZF_LED_RGB_SunLED_XZMDKCBDDG45S-9_cast</footprint>
       <fields>
+        <field name="Mfr Part #">XZMDKCBDDG45S-9</field>
+        <field name="Package">SMT</field>
         <field name="Subs Allowed">No</field>
         <field name="RoHS">Yes</field>
       </fields>
@@ -41,21 +45,12 @@
       <sheetpath names="/" tstamps="/"/>
       <tstamp>58B4B5D1</tstamp>
     </comp>
-    <comp ref="Q2">
-      <value>NPN_dual</value>
-      <footprint>KiCad_Footprints:ZF_SMD_SOT-363</footprint>
-      <fields>
-        <field name="Subs Allowed">No</field>
-        <field name="RoHS">Yes</field>
-      </fields>
-      <libsource lib="NeuroTinker_schematic_symbols" part="NPN_dual"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>58B4BE96</tstamp>
-    </comp>
     <comp ref="P6">
       <value>CONN_01X04</value>
       <footprint>KiCad_Footprints:ZF_CONN_JST_GH</footprint>
       <fields>
+        <field name="Mfr Part #">SM04B-GHS-GD-TB(LF)(SN)</field>
+        <field name="Package">JST_GH_4-POS</field>
         <field name="Subs Allowed">No</field>
         <field name="RoHS">Yes</field>
       </fields>
@@ -67,6 +62,8 @@
       <value>CONN_01X04</value>
       <footprint>KiCad_Footprints:ZF_CONN_JST_GH</footprint>
       <fields>
+        <field name="Mfr Part #">SM04B-GHS-GD-TB(LF)(SN)</field>
+        <field name="Package">JST_GH_4-POS</field>
         <field name="Subs Allowed">No</field>
         <field name="RoHS">Yes</field>
       </fields>
@@ -78,6 +75,8 @@
       <value>STM32L011Gx</value>
       <footprint>KiCad_Footprints:ZF_IC_UFQFPN28-050</footprint>
       <fields>
+        <field name="Mfr Part #">STM32L011G4U6</field>
+        <field name="Package">UFQFPN28</field>
         <field name="Subs Allowed">No</field>
         <field name="RoHS">Yes</field>
       </fields>
@@ -89,6 +88,8 @@
       <value>LD3985G33R</value>
       <footprint>KiCad_Footprints:ZF_SOT23-5L</footprint>
       <fields>
+        <field name="Mfr Part #">MF-REG-SOT235-3.3V-300mA</field>
+        <field name="Package">SOT23-5L</field>
         <field name="Subs Allowed">No</field>
         <field name="RoHS">Yes</field>
       </fields>
@@ -97,9 +98,11 @@
       <tstamp>58B5C9D0</tstamp>
     </comp>
     <comp ref="C1">
-      <value>1 uF</value>
+      <value>1uF</value>
       <footprint>KiCad_Footprints:ZF_SMD_NonPol_0603</footprint>
       <fields>
+        <field name="Mfr Part #">MF-CAP-0603-1uF</field>
+        <field name="Package">C0603</field>
         <field name="Subs Allowed">Yes</field>
         <field name="RoHS">Yes</field>
       </fields>
@@ -108,9 +111,11 @@
       <tstamp>58B5CACA</tstamp>
     </comp>
     <comp ref="C4">
-      <value>1 uF</value>
+      <value>1uF</value>
       <footprint>KiCad_Footprints:ZF_SMD_NonPol_0603</footprint>
       <fields>
+        <field name="Mfr Part #">MF-CAP-0603-1uF</field>
+        <field name="Package">C0603</field>
         <field name="Subs Allowed">Yes</field>
         <field name="RoHS">Yes</field>
       </fields>
@@ -118,21 +123,12 @@
       <sheetpath names="/" tstamps="/"/>
       <tstamp>58B5D1F9</tstamp>
     </comp>
-    <comp ref="C2">
-      <value>10 uF</value>
-      <footprint>KiCad_Footprints:ZF_SMD_pol_1206</footprint>
-      <fields>
-        <field name="Subs Allowed">Yes</field>
-        <field name="RoHS">Yes</field>
-      </fields>
-      <libsource lib="device" part="CP"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>58B5DAAA</tstamp>
-    </comp>
     <comp ref="P12">
       <value>CONN_01X07</value>
       <footprint>KiCad_Footprints:ZF_CONN_JST_GH_7POS</footprint>
       <fields>
+        <field name="Mfr Part #">SM07B-GHS-TB(LF)(SN)</field>
+        <field name="Package">JST_GH_7-POS</field>
         <field name="Subs Allowed">No</field>
         <field name="RoHS">Yes</field>
       </fields>
@@ -144,6 +140,8 @@
       <value>SW_PUSH</value>
       <footprint>KiCad_Footprints:ZF_SW_Momentary_SideMtg</footprint>
       <fields>
+        <field name="Mfr Part #">TL3330AF130QG</field>
+        <field name="Package">SMT</field>
         <field name="Subs Allowed">No</field>
         <field name="RoHS">Yes</field>
       </fields>
@@ -152,9 +150,11 @@
       <tstamp>58B5A249</tstamp>
     </comp>
     <comp ref="R1">
-      <value>150</value>
+      <value>220</value>
       <footprint>KiCad_Footprints:ZF_SMD_NonPol_0402</footprint>
       <fields>
+        <field name="Mfr Part #">MF-RES-0402-220</field>
+        <field name="Package">R0402</field>
         <field name="Subs Allowed">Yes</field>
         <field name="RoHS">Yes</field>
       </fields>
@@ -166,6 +166,8 @@
       <value>100</value>
       <footprint>KiCad_Footprints:ZF_SMD_NonPol_0402</footprint>
       <fields>
+        <field name="Mfr Part #">MF-RES-0402-100</field>
+        <field name="Package">R0402</field>
         <field name="Subs Allowed">Yes</field>
         <field name="RoHS">Yes</field>
       </fields>
@@ -177,6 +179,8 @@
       <value>100</value>
       <footprint>KiCad_Footprints:ZF_SMD_NonPol_0402</footprint>
       <fields>
+        <field name="Mfr Part #">MF-RES-0402-100</field>
+        <field name="Package">R0402</field>
         <field name="Subs Allowed">Yes</field>
         <field name="RoHS">Yes</field>
       </fields>
@@ -184,21 +188,12 @@
       <sheetpath names="/" tstamps="/"/>
       <tstamp>58B5C32A</tstamp>
     </comp>
-    <comp ref="Q1">
-      <value>NPN_dual</value>
-      <footprint>KiCad_Footprints:ZF_SMD_SOT-363</footprint>
-      <fields>
-        <field name="Subs Allowed">No</field>
-        <field name="RoHS">Yes</field>
-      </fields>
-      <libsource lib="NeuroTinker_schematic_symbols" part="NPN_dual"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>58B5E1EC</tstamp>
-    </comp>
     <comp ref="C5">
-      <value>100 nF</value>
+      <value>0.1uF</value>
       <footprint>KiCad_Footprints:ZF_SMD_NonPol_0402_cap</footprint>
       <fields>
+        <field name="Mfr Part #">MF-CAP-0402-0.1uF</field>
+        <field name="Package">C0402</field>
         <field name="Subs Allowed">Yes</field>
         <field name="RoHS">Yes</field>
       </fields>
@@ -228,16 +223,93 @@
       <sheetpath names="/" tstamps="/"/>
       <tstamp>58D1B582</tstamp>
     </comp>
-    <comp ref="RN1">
-      <value>1k x4</value>
-      <footprint>KiCad_Footprints:ZF_RN_4iso_CTS-0804</footprint>
+    <comp ref="Q1">
+      <value>MMBT3904</value>
+      <footprint>SOT-23</footprint>
       <fields>
-        <field name="Subs Allowed">Yes</field>
+        <field name="Mfr Part #">MF-DSC-SOT233-MMBT3904</field>
+        <field name="Package">SOT23-3L</field>
+        <field name="Subs Allowed">No</field>
         <field name="RoHS">Yes</field>
       </fields>
-      <libsource lib="device" part="R_Pack04"/>
+      <libsource lib="transistors" part="MMBT3904"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamp>590B998A</tstamp>
+      <tstamp>592F677E</tstamp>
+    </comp>
+    <comp ref="R5">
+      <value>1k</value>
+      <fields>
+        <field name="Mfr Part #">MF-RES-0402-1K</field>
+        <field name="Package">R0402</field>
+        <field name="Subs Allowed">No</field>
+        <field name="RoHS">Yes</field>
+      </fields>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>592F68FF</tstamp>
+    </comp>
+    <comp ref="Q2">
+      <value>MMBT3904</value>
+      <footprint>SOT-23</footprint>
+      <fields>
+        <field name="Mfr Part #">MF-DSC-SOT233-MMBT3904</field>
+        <field name="Package">SOT23-3L</field>
+        <field name="Subs Allowed">No</field>
+        <field name="RoHS">Yes</field>
+      </fields>
+      <libsource lib="transistors" part="MMBT3904"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>592F6BA0</tstamp>
+    </comp>
+    <comp ref="R6">
+      <value>1k</value>
+      <fields>
+        <field name="Mfr Part #">MF-RES-0402-1K</field>
+        <field name="Package">R0402</field>
+        <field name="Subs Allowed">No</field>
+        <field name="RoHS">Yes</field>
+      </fields>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>592F6D17</tstamp>
+    </comp>
+    <comp ref="R7">
+      <value>1k</value>
+      <fields>
+        <field name="Mfr Part #">MF-RES-0402-1K</field>
+        <field name="Package">R0402</field>
+        <field name="Subs Allowed">No</field>
+        <field name="RoHS">Yes</field>
+      </fields>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>592F71A8</tstamp>
+    </comp>
+    <comp ref="Q3">
+      <value>MMBT3904</value>
+      <footprint>SOT-23</footprint>
+      <fields>
+        <field name="Mfr Part #">MF-DSC-SOT233-MMBT3904</field>
+        <field name="Package">SOT23-3L</field>
+        <field name="Subs Allowed">No</field>
+        <field name="RoHS">Yes</field>
+      </fields>
+      <libsource lib="transistors" part="MMBT3904"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>592F72A0</tstamp>
+    </comp>
+    <comp ref="C2">
+      <value>10uF</value>
+      <footprint>KiCad_Footprints:ZF_SMD_nonpol_1206</footprint>
+      <fields>
+        <field name="Mfr Part #">MF-CAP-1206-10uF</field>
+        <field name="Package">C1206</field>
+        <field name="Subs Allowed">No</field>
+        <field name="RoHS">Yes</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>592F7BC3</tstamp>
     </comp>
   </components>
   <libparts>
@@ -300,26 +372,6 @@
         <pin num="7" name="P7" type="passive"/>
       </pins>
     </libpart>
-    <libpart lib="device" part="CP">
-      <description>Polarised capacitor</description>
-      <footprints>
-        <fp>CP*</fp>
-        <fp>C_Axial*</fp>
-        <fp>C_Radial*</fp>
-        <fp>TantalC*</fp>
-        <fp>C*elec</fp>
-        <fp>c_elec*</fp>
-        <fp>SMD*_Pol</fp>
-      </footprints>
-      <fields>
-        <field name="Reference">C</field>
-        <field name="Value">CP</field>
-      </fields>
-      <pins>
-        <pin num="1" name="~" type="passive"/>
-        <pin num="2" name="~" type="passive"/>
-      </pins>
-    </libpart>
     <libpart lib="regul" part="LD3985G122R">
       <aliases>
         <alias>LD3985G18R</alias>
@@ -362,18 +414,21 @@
         <pin num="4" name="GK" type="passive"/>
       </pins>
     </libpart>
-    <libpart lib="NeuroTinker_schematic_symbols" part="NPN_dual">
+    <libpart lib="transistors" part="MMBT3904">
+      <description>40V Vce, 0.2A Ic, NPN, Small Signal Transistor, SOT-23</description>
+      <docs>http://www.nxp.com/documents/data_sheet/MMBT3904.pdf</docs>
+      <footprints>
+        <fp>SOT-23*</fp>
+      </footprints>
       <fields>
         <field name="Reference">Q</field>
-        <field name="Value">NPN_dual</field>
+        <field name="Value">MMBT3904</field>
+        <field name="Footprint">SOT-23</field>
       </fields>
       <pins>
-        <pin num="1" name="~" type="input"/>
-        <pin num="2" name="BASE2" type="input"/>
-        <pin num="3" name="~" type="input"/>
-        <pin num="4" name="~" type="input"/>
-        <pin num="5" name="BASE1" type="input"/>
-        <pin num="6" name="~" type="input"/>
+        <pin num="1" name="B" type="input"/>
+        <pin num="2" name="E" type="passive"/>
+        <pin num="3" name="C" type="passive"/>
       </pins>
     </libpart>
     <libpart lib="device" part="R">
@@ -389,27 +444,6 @@
       <pins>
         <pin num="1" name="~" type="passive"/>
         <pin num="2" name="~" type="passive"/>
-      </pins>
-    </libpart>
-    <libpart lib="device" part="R_Pack04">
-      <description>4 Resistor network, parallel topology, DIP package</description>
-      <footprints>
-        <fp>DIP*</fp>
-        <fp>SOIC*</fp>
-      </footprints>
-      <fields>
-        <field name="Reference">RN</field>
-        <field name="Value">R_Pack04</field>
-      </fields>
-      <pins>
-        <pin num="1" name="R1.1" type="passive"/>
-        <pin num="2" name="R2.1" type="passive"/>
-        <pin num="3" name="R3.1" type="passive"/>
-        <pin num="4" name="R4.1" type="passive"/>
-        <pin num="5" name="R4.2" type="passive"/>
-        <pin num="6" name="R3.2" type="passive"/>
-        <pin num="7" name="R2.2" type="passive"/>
-        <pin num="8" name="R1.2" type="passive"/>
       </pins>
     </libpart>
     <libpart lib="NeuroTinker_schematic_symbols" part="STM32L011Gx">
@@ -469,190 +503,178 @@
     <library logical="device">
       <uri>/usr/share/kicad/library/device.lib</uri>
     </library>
+    <library logical="transistors">
+      <uri>/usr/share/kicad/library/transistors.lib</uri>
+    </library>
     <library logical="NeuroTinker_schematic_symbols">
       <uri>/home/zach/Documents/NeuroTinker/Products/NeuroBytes_Touch_Sensor/HARDWARE/NeuroBytes_Schematic_Lib/NeuroTinker_schematic_symbols.lib</uri>
     </library>
   </libraries>
   <nets>
-    <net code="1" name="Net-(D1-Pad4)">
-      <node ref="R2" pin="1"/>
-      <node ref="D1" pin="4"/>
+    <net code="1" name="Net-(Q3-Pad3)">
+      <node ref="R3" pin="2"/>
+      <node ref="Q3" pin="3"/>
     </net>
-    <net code="2" name="Net-(Q1-Pad3)">
-      <node ref="R1" pin="2"/>
-      <node ref="Q1" pin="3"/>
-    </net>
-    <net code="3" name="Net-(D1-Pad1)">
-      <node ref="R1" pin="1"/>
-      <node ref="D1" pin="1"/>
-    </net>
-    <net code="4" name="SWDIO/SCK">
-      <node ref="P12" pin="3"/>
-      <node ref="U1" pin="21"/>
-    </net>
-    <net code="5" name="Net-(D1-Pad3)">
-      <node ref="R3" pin="1"/>
+    <net code="2" name="Net-(D1-Pad3)">
       <node ref="D1" pin="3"/>
+      <node ref="R3" pin="1"/>
     </net>
-    <net code="6" name="SWCLK/MISO">
-      <node ref="P12" pin="4"/>
+    <net code="3" name="Net-(D1-Pad4)">
+      <node ref="D1" pin="4"/>
+      <node ref="R2" pin="1"/>
+    </net>
+    <net code="4" name="Net-(Q1-Pad3)">
+      <node ref="Q1" pin="3"/>
+      <node ref="R1" pin="2"/>
+    </net>
+    <net code="5" name="Net-(D1-Pad1)">
+      <node ref="D1" pin="1"/>
+      <node ref="R1" pin="1"/>
+    </net>
+    <net code="6" name="SWDIO/SCK">
+      <node ref="U1" pin="21"/>
+      <node ref="P12" pin="3"/>
+    </net>
+    <net code="7" name="SWCLK/MISO">
       <node ref="U1" pin="22"/>
+      <node ref="P12" pin="4"/>
     </net>
-    <net code="7" name="NSS">
+    <net code="8" name="INPUT">
+      <node ref="U1" pin="15"/>
+      <node ref="SW2" pin="2"/>
+    </net>
+    <net code="9" name="GND">
+      <node ref="Q2" pin="2"/>
+      <node ref="P6" pin="1"/>
+      <node ref="Q1" pin="2"/>
+      <node ref="C2" pin="2"/>
+      <node ref="R4" pin="1"/>
+      <node ref="Q3" pin="2"/>
+      <node ref="C3" pin="2"/>
+      <node ref="U2" pin="2"/>
+      <node ref="U1" pin="16"/>
+      <node ref="P12" pin="1"/>
+      <node ref="C5" pin="2"/>
+      <node ref="P7" pin="1"/>
+      <node ref="SW2" pin="1"/>
+      <node ref="SW1" pin="1"/>
+      <node ref="C1" pin="2"/>
+      <node ref="C4" pin="2"/>
+    </net>
+    <net code="10" name="NSS">
       <node ref="P12" pin="5"/>
       <node ref="U1" pin="23"/>
     </net>
-    <net code="8" name="MOSI">
+    <net code="11" name="IDENTIFY">
+      <node ref="SW1" pin="2"/>
+      <node ref="U1" pin="14"/>
+    </net>
+    <net code="12" name="+5V">
+      <node ref="C1" pin="1"/>
+      <node ref="U2" pin="3"/>
+      <node ref="U2" pin="1"/>
+      <node ref="D1" pin="2"/>
+      <node ref="P6" pin="2"/>
+      <node ref="P12" pin="7"/>
+      <node ref="P7" pin="2"/>
+    </net>
+    <net code="13" name="MOSI">
       <node ref="P12" pin="6"/>
       <node ref="U1" pin="26"/>
     </net>
-    <net code="9" name="IDENTIFY">
-      <node ref="U1" pin="14"/>
-      <node ref="SW1" pin="2"/>
-    </net>
-    <net code="10" name="Net-(Q1-Pad6)">
-      <node ref="R2" pin="2"/>
-      <node ref="Q1" pin="6"/>
-    </net>
-    <net code="11" name="Net-(Q1-Pad5)">
-      <node ref="Q1" pin="5"/>
-      <node ref="RN1" pin="7"/>
-    </net>
-    <net code="12" name="Net-(Q2-Pad6)">
-      <node ref="R3" pin="2"/>
-      <node ref="Q2" pin="6"/>
-    </net>
-    <net code="13" name="RESET">
-      <node ref="C5" pin="1"/>
+    <net code="14" name="RESET">
       <node ref="U1" pin="4"/>
       <node ref="P12" pin="2"/>
+      <node ref="C5" pin="1"/>
     </net>
-    <net code="14" name="GND">
-      <node ref="C2" pin="2"/>
-      <node ref="R4" pin="1"/>
-      <node ref="C5" pin="2"/>
-      <node ref="Q1" pin="4"/>
-      <node ref="SW2" pin="1"/>
+    <net code="15" name="LED_R">
+      <node ref="R5" pin="2"/>
+      <node ref="U1" pin="6"/>
+    </net>
+    <net code="16" name="Net-(Q2-Pad1)">
+      <node ref="R6" pin="1"/>
       <node ref="Q2" pin="1"/>
-      <node ref="P6" pin="1"/>
-      <node ref="P12" pin="1"/>
+    </net>
+    <net code="17" name="LED_G">
+      <node ref="R6" pin="2"/>
+      <node ref="U1" pin="7"/>
+    </net>
+    <net code="18" name="Net-(Q2-Pad3)">
+      <node ref="Q2" pin="3"/>
+      <node ref="R2" pin="2"/>
+    </net>
+    <net code="19" name="Net-(Q1-Pad1)">
+      <node ref="R5" pin="1"/>
       <node ref="Q1" pin="1"/>
-      <node ref="C3" pin="2"/>
-      <node ref="P7" pin="1"/>
-      <node ref="C4" pin="2"/>
-      <node ref="U2" pin="2"/>
-      <node ref="U1" pin="16"/>
-      <node ref="SW1" pin="1"/>
-      <node ref="C1" pin="2"/>
     </net>
-    <net code="15" name="+3V3">
-      <node ref="U1" pin="17"/>
-      <node ref="U1" pin="5"/>
-      <node ref="C3" pin="1"/>
-      <node ref="C4" pin="1"/>
-      <node ref="U2" pin="5"/>
-      <node ref="C2" pin="1"/>
+    <net code="20" name="Net-(Q3-Pad1)">
+      <node ref="R7" pin="1"/>
+      <node ref="Q3" pin="1"/>
     </net>
-    <net code="16" name="+5V">
-      <node ref="D1" pin="2"/>
-      <node ref="C1" pin="1"/>
-      <node ref="P12" pin="7"/>
-      <node ref="U2" pin="3"/>
-      <node ref="U2" pin="1"/>
-      <node ref="P6" pin="2"/>
-      <node ref="P7" pin="2"/>
-    </net>
-    <net code="17" name="LED_B">
+    <net code="21" name="LED_B">
       <node ref="U1" pin="8"/>
-      <node ref="RN1" pin="3"/>
+      <node ref="R7" pin="2"/>
     </net>
-    <net code="18" name="A2IN">
-      <node ref="P7" pin="3"/>
-      <node ref="U1" pin="11"/>
-    </net>
-    <net code="19" name="A2EX">
+    <net code="22" name="A2EX">
       <node ref="P7" pin="4"/>
       <node ref="U1" pin="12"/>
     </net>
-    <net code="20" name="A1IN">
-      <node ref="U1" pin="9"/>
-      <node ref="P6" pin="3"/>
-    </net>
-    <net code="21" name="Net-(Q2-Pad2)">
-      <node ref="Q2" pin="2"/>
-      <node ref="RN1" pin="6"/>
-    </net>
-    <net code="22" name="LED_R">
-      <node ref="U1" pin="6"/>
-      <node ref="RN1" pin="1"/>
-    </net>
-    <net code="23" name="LED_G">
-      <node ref="RN1" pin="2"/>
-      <node ref="U1" pin="7"/>
-    </net>
-    <net code="24" name="Net-(Q1-Pad2)">
-      <node ref="Q1" pin="2"/>
-      <node ref="RN1" pin="8"/>
-    </net>
-    <net code="25" name="INPUT">
-      <node ref="SW2" pin="2"/>
-      <node ref="U1" pin="15"/>
-    </net>
-    <net code="26" name="Net-(R4-Pad2)">
+    <net code="23" name="Net-(R4-Pad2)">
       <node ref="U1" pin="1"/>
       <node ref="R4" pin="2"/>
     </net>
-    <net code="27" name="Net-(RN1-Pad5)">
-      <node ref="RN1" pin="5"/>
+    <net code="24" name="A2IN">
+      <node ref="U1" pin="11"/>
+      <node ref="P7" pin="3"/>
     </net>
-    <net code="28" name="Net-(RN1-Pad4)">
-      <node ref="RN1" pin="4"/>
-    </net>
-    <net code="29" name="Net-(Q2-Pad5)">
-      <node ref="Q2" pin="5"/>
-    </net>
-    <net code="30" name="Net-(Q2-Pad4)">
-      <node ref="Q2" pin="4"/>
-    </net>
-    <net code="31" name="Net-(Q2-Pad3)">
-      <node ref="Q2" pin="3"/>
-    </net>
-    <net code="32" name="A1EX">
+    <net code="25" name="A1EX">
       <node ref="U1" pin="10"/>
       <node ref="P6" pin="4"/>
+    </net>
+    <net code="26" name="A1IN">
+      <node ref="P6" pin="3"/>
+      <node ref="U1" pin="9"/>
+    </net>
+    <net code="27" name="Net-(U1-Pad3)">
+      <node ref="U1" pin="3"/>
+    </net>
+    <net code="28" name="Net-(U1-Pad2)">
+      <node ref="U1" pin="2"/>
+    </net>
+    <net code="29" name="+3V3">
+      <node ref="U1" pin="17"/>
+      <node ref="U2" pin="5"/>
+      <node ref="C3" pin="1"/>
+      <node ref="U1" pin="5"/>
+      <node ref="C2" pin="1"/>
+      <node ref="C4" pin="1"/>
+    </net>
+    <net code="30" name="Net-(U1-Pad25)">
+      <node ref="U1" pin="25"/>
+    </net>
+    <net code="31" name="Net-(U1-Pad24)">
+      <node ref="U1" pin="24"/>
+    </net>
+    <net code="32" name="Net-(U1-Pad13)">
+      <node ref="U1" pin="13"/>
     </net>
     <net code="33" name="Net-(U1-Pad20)">
       <node ref="U1" pin="20"/>
     </net>
-    <net code="34" name="Net-(U1-Pad13)">
-      <node ref="U1" pin="13"/>
-    </net>
-    <net code="35" name="Net-(U1-Pad3)">
-      <node ref="U1" pin="3"/>
-    </net>
-    <net code="36" name="Net-(U1-Pad2)">
-      <node ref="U1" pin="2"/>
-    </net>
-    <net code="37" name="Net-(U2-Pad4)">
-      <node ref="U2" pin="4"/>
-    </net>
-    <net code="38" name="Net-(U1-Pad19)">
-      <node ref="U1" pin="19"/>
-    </net>
-    <net code="39" name="Net-(U1-Pad28)">
-      <node ref="U1" pin="28"/>
-    </net>
-    <net code="40" name="Net-(U1-Pad18)">
-      <node ref="U1" pin="18"/>
-    </net>
-    <net code="41" name="Net-(U1-Pad27)">
+    <net code="34" name="Net-(U1-Pad27)">
       <node ref="U1" pin="27"/>
     </net>
-    <net code="42" name="Net-(U1-Pad25)">
-      <node ref="U1" pin="25"/>
+    <net code="35" name="Net-(U1-Pad18)">
+      <node ref="U1" pin="18"/>
     </net>
-    <net code="43" name="Net-(U1-Pad24)">
-      <node ref="U1" pin="24"/>
+    <net code="36" name="Net-(U1-Pad28)">
+      <node ref="U1" pin="28"/>
+    </net>
+    <net code="37" name="Net-(U1-Pad19)">
+      <node ref="U1" pin="19"/>
+    </net>
+    <net code="38" name="Net-(U2-Pad4)">
+      <node ref="U2" pin="4"/>
     </net>
   </nets>
 </export>
