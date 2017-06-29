@@ -1,0 +1,37 @@
+Title,NeuroBytes Touch Sensor
+Revision,B
+Date,2017-05-16
+Generated,Wed 31 May 2017 08:10:38 PM CDT
+Company,NeuroTinker, LLC
+Comment 1,License: GPL v3
+Comment 2,
+Comment 3,
+Comment 4,
+Total Parts,23
+Total Unique Parts,16
+
+
+
+Ref,Qty,Value,Mfr Part #,Package,RoHS,Subs Allowed,
+C3 ,1,100 nF,MF-CAP-0402-0.1uF,C0402,Yes,Yes
+C1 C4 ,2,1uF,MF-CAP-0603-1uF,C0603,Yes,Yes
+C5 ,1,0.1uF,MF-CAP-0402-0.1uF,C0402,Yes,Yes
+C2 ,1,10uF,MF-CAP-1206-10uF,C1206,Yes,No
+D1 ,1,LED_RABG,XZMDKCBDDG45S-9,SMT,Yes,No
+P6 P7 ,2,CONN_01X04,SM04B-GHS-GD-TB(LF)(SN),JST_GH_4-POS,Yes,No
+P12 ,1,CONN_01X07,SM07B-GHS-TB(LF)(SN),JST_GH_7-POS,Yes,No
+Q1 Q2 Q3 ,3,MMBT3904,MF-DSC-SOT233-MMBT3904,SOT23-3L,Yes,No
+R1 ,1,220,MF-RES-0402-220,R0402,Yes,Yes
+R2 R3 ,2,100,MF-RES-0402-100,R0402,Yes,Yes
+R4 ,1,JMP, , ,Yes,Yes
+R5 R6 R7 ,3,1k,MF-RES-0402-1K,R0402,Yes,No
+SW1 ,1,SW_PUSH,TL3330AF130QG,SMT,Yes,No
+SW2 ,1,SW_SNAP_ACTION, , ,Yes,No
+U1 ,1,STM32L011Gx,STM32L011G4U6,UFQFPN28,Yes,No
+U2 ,1,LD3985G33R,MF-REG-SOT235-3.3V-300mA,SOT23-5L,Yes,No
+
+
+
+
+BOM made with KICAD_BOM_WIZARD (https://github.com/HashDefineElectronics/KiCad_BOM_Wizard.git)
+Generated Wed 31 May 2017 08:10:38 PM CDT
