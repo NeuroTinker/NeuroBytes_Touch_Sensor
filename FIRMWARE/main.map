@@ -970,24 +970,24 @@ END GROUP
                 0x0000000020000800                PROVIDE (_stack, (ORIGIN (ram) + LENGTH (ram)))
 OUTPUT(main.elf elf32-littlearm)
 
-.debug_info     0x0000000000000000     0x4b80
+.debug_info     0x0000000000000000     0x4b7f
  .debug_info    0x0000000000000000      0x737 comm.o
  .debug_info    0x0000000000000737      0xe49 HAL.o
  .debug_info    0x0000000000001580      0x527 neuron.o
- .debug_info    0x0000000000001aa7      0x6b7 main.o
- .debug_info    0x000000000000215e      0x3d4 ../libopencm3/lib/libopencm3_stm32l0.a(rcc.o)
- .debug_info    0x0000000000002532     0x116a ../libopencm3/lib/libopencm3_stm32l0.a(timer_common_all.o)
- .debug_info    0x000000000000369c      0x22c ../libopencm3/lib/libopencm3_stm32l0.a(gpio_common_all.o)
- .debug_info    0x00000000000038c8      0x1f3 ../libopencm3/lib/libopencm3_stm32l0.a(gpio_common_f0234.o)
- .debug_info    0x0000000000003abb      0x575 ../libopencm3/lib/libopencm3_stm32l0.a(rcc_common_all.o)
- .debug_info    0x0000000000004030      0x204 ../libopencm3/lib/libopencm3_stm32l0.a(exti_common_all.o)
- .debug_info    0x0000000000004234      0x2a3 ../libopencm3/lib/libopencm3_stm32l0.a(vector.o)
- .debug_info    0x00000000000044d7      0x215 ../libopencm3/lib/libopencm3_stm32l0.a(systick.o)
- .debug_info    0x00000000000046ec      0x1b0 ../libopencm3/lib/libopencm3_stm32l0.a(nvic.o)
- .debug_info    0x000000000000489c       0xb9 /usr/lib/gcc/arm-none-eabi/4.9.3/armv6-m/libgcc.a(_thumb1_case_sqi.o)
- .debug_info    0x0000000000004955       0xb9 /usr/lib/gcc/arm-none-eabi/4.9.3/armv6-m/libgcc.a(_thumb1_case_uqi.o)
- .debug_info    0x0000000000004a0e       0xb9 /usr/lib/gcc/arm-none-eabi/4.9.3/armv6-m/libgcc.a(_divsi3.o)
- .debug_info    0x0000000000004ac7       0xb9 /usr/lib/gcc/arm-none-eabi/4.9.3/armv6-m/libgcc.a(_dvmd_tls.o)
+ .debug_info    0x0000000000001aa7      0x6b6 main.o
+ .debug_info    0x000000000000215d      0x3d4 ../libopencm3/lib/libopencm3_stm32l0.a(rcc.o)
+ .debug_info    0x0000000000002531     0x116a ../libopencm3/lib/libopencm3_stm32l0.a(timer_common_all.o)
+ .debug_info    0x000000000000369b      0x22c ../libopencm3/lib/libopencm3_stm32l0.a(gpio_common_all.o)
+ .debug_info    0x00000000000038c7      0x1f3 ../libopencm3/lib/libopencm3_stm32l0.a(gpio_common_f0234.o)
+ .debug_info    0x0000000000003aba      0x575 ../libopencm3/lib/libopencm3_stm32l0.a(rcc_common_all.o)
+ .debug_info    0x000000000000402f      0x204 ../libopencm3/lib/libopencm3_stm32l0.a(exti_common_all.o)
+ .debug_info    0x0000000000004233      0x2a3 ../libopencm3/lib/libopencm3_stm32l0.a(vector.o)
+ .debug_info    0x00000000000044d6      0x215 ../libopencm3/lib/libopencm3_stm32l0.a(systick.o)
+ .debug_info    0x00000000000046eb      0x1b0 ../libopencm3/lib/libopencm3_stm32l0.a(nvic.o)
+ .debug_info    0x000000000000489b       0xb9 /usr/lib/gcc/arm-none-eabi/4.9.3/armv6-m/libgcc.a(_thumb1_case_sqi.o)
+ .debug_info    0x0000000000004954       0xb9 /usr/lib/gcc/arm-none-eabi/4.9.3/armv6-m/libgcc.a(_thumb1_case_uqi.o)
+ .debug_info    0x0000000000004a0d       0xb9 /usr/lib/gcc/arm-none-eabi/4.9.3/armv6-m/libgcc.a(_divsi3.o)
+ .debug_info    0x0000000000004ac6       0xb9 /usr/lib/gcc/arm-none-eabi/4.9.3/armv6-m/libgcc.a(_dvmd_tls.o)
 
 .debug_abbrev   0x0000000000000000     0x1175
  .debug_abbrev  0x0000000000000000      0x25f comm.o
