@@ -298,20 +298,20 @@ void setLED(uint16_t r, uint16_t g, uint16_t b)
 {
 	if (r <= 1023) 
 	{
-		timer_set_oc_value(TIM2, TIM_OC2, gamma_lookup[r]);
+		timer_set_oc_value(TIM2, TIM_OC1, gamma_lookup[r]);
 	}
 	else 
 	{
-		timer_set_oc_value(TIM2, TIM_OC2, 9600);
+		timer_set_oc_value(TIM2, TIM_OC1, 9600);
 	}
 
 	if (g <= 1023) 
 	{
-		timer_set_oc_value(TIM2, TIM_OC1, gamma_lookup[g]);
+		timer_set_oc_value(TIM2, TIM_OC2, gamma_lookup[g]);
 	}
 	else
 	{
-		timer_set_oc_value(TIM2, TIM_OC1, 9600);
+		timer_set_oc_value(TIM2, TIM_OC2, 9600);
 	}
 
 	if (b <= 1023)

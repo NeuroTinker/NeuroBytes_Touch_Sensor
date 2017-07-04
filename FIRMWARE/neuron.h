@@ -4,14 +4,15 @@
 #include "comm.h"
 
 #define MEMBRANE_THRESHOLD      140
-#define HYPERPOLARIZATION		-360
+#define HYPERPOLARIZATION		-220
 #define DENDRITE_COUNT          5
 #define PULSE_LENGTH            20 // led white time
 #define DECAY_TIME              2
 
 #define DENDRITE_ALIVE_TIME     200
-#define FIRE_RED_TIME           10
-#define FIRE_WHITE_TIME         15
+#define FIRE_RED_TIME           1
+#define FIRE_WHITE_TIME         3
+#define FIRE_DELAY_TIME         20
 
 //typedef enum gpio_pins gpio_pin;
 //typedef enum gpio_ports gpio_port;
