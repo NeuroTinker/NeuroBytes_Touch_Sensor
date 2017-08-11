@@ -19,6 +19,12 @@
 #define FIRE_LED_TIME		10
 #define	DEBOUNCE_TIME		3
 
+static uint32_t fingerprint[3] __attribute__((section (".fingerprint"))) __attribute__ ((__used__)) = {
+	5, // device id
+	1, // firmware version
+	0  // unique id
+};
+
 int main(void)
 {
 	uint32_t	blink_time = 0;
