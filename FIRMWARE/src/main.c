@@ -167,7 +167,7 @@ int main(void)
 					} else if (neuron.potential < 0 && neuron.potential > -140){
 						setLED(0, 200 + (neuron.potential * 10 / 7), -1 * neuron.potential * 10 / 7);
 					} else{
-						setLED(0,200,0);
+						setLED(100,200,0);
 					}
 				}
 			} else if (neuron.state == INTEGRATE){
