@@ -2,10 +2,7 @@
 *.o
 *.ko
 *.obj
-<<<<<<< HEAD
-=======
 *.d
->>>>>>> development
 
 # Precompiled Headers
 *.gch
