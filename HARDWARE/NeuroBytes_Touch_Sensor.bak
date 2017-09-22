@@ -94,13 +94,13 @@ RESET
 Wire Wire Line
 	1650 1950 2800 1950
 Text GLabel 5400 2400 2    60   Input ~ 0
-SWCLK/MISO
+SWCLK
 Wire Wire Line
 	6200 3150 6200 1050
 Wire Wire Line
 	5400 2400 5200 2400
 Text GLabel 5400 2550 2    60   Input ~ 0
-SWDIO/SCK
+SWDIO
 Wire Wire Line
 	5400 2550 5200 2550
 Text GLabel 2600 2550 0    60   Input ~ 0
@@ -444,9 +444,9 @@ RESET
 Wire Wire Line
 	9250 4750 10300 4750
 Text GLabel 9250 5150 0    60   Input ~ 0
-SWCLK/MISO
+SWCLK
 Text GLabel 9250 4950 0    60   Input ~ 0
-SWDIO/SCK
+SWDIO
 Wire Wire Line
 	9250 5150 9450 5150
 Wire Wire Line
