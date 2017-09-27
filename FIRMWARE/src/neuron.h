@@ -3,19 +3,21 @@
 
 #include "comm.h"
 
-#define MEMBRANE_THRESHOLD      140
-#define HYPERPOLARIZATION		-220
-#define DENDRITE_COUNT          5
-#define PULSE_LENGTH            20 // led white time
-#define DECAY_TIME              2
+#define MEMBRANE_THRESHOLD      10000
+#define HYPERPOLARIZATION		-8500
+#define DENDRITE_COUNT          1
+#define PULSE_LENGTH            5 // led white time
 
 #define DENDRITE_ALIVE_TIME     200
-#define FIRE_RED_TIME           1
-#define FIRE_WHITE_TIME         3
+#define FIRE_LED_TIME           5
 #define FIRE_DELAY_TIME         20
 
-//typedef enum gpio_pins gpio_pin;
-//typedef enum gpio_ports gpio_port;
+#define LEARNING_WINDOW         50
+#define LEARNING_CHANGE         500
+#define MAX_WEIGHTING           18000
+
+#define DEPRESSION_TIME         50
+
 
 typedef enum{
 NC =   0,
@@ -39,7 +41,8 @@ dendrite_states     state; // is pulse being received or not
 dendrite_status     status; // not connected / connected
 dendrite_types      type; // excitatory or inhibitory
 uint16_t            alive_time;
-int16_t             magnitude; // weighting
+int32_t             magnitude; // weighting
+int32_t             base_magnitude;
 int16_t             current_value; // current contribution to the membrane potential
 uint8_t             nid_flag; // is this dendrite the closest to the NID
 uint8_t             read_flag; // dendrite is currently getting a message
@@ -75,6 +78,8 @@ uint16_t	hebb_time;
 uint8_t		time_multiple;
 uint16_t	ms_count;
 
+uint16_t    leaky_current;
+
 } neuron_t;
 
 void neuronInit(neuron_t *n);
@@ -84,5 +89,7 @@ void dendriteDecayStep(neuron_t * n);
 void membraneDecayStep(neuron_t * n);
 void dendriteSwitchOff(dendrite_t * dendrite);
 void incrementHebbTime(neuron_t *n);
+void calcDendriteWeightings(neuron_t *n);
+
 
 #endif

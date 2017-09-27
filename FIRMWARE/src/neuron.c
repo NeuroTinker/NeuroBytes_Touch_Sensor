@@ -4,7 +4,7 @@
 
 uint16_t input_pins[2] = {
     PIN_AXON1_IN,
-	PIN_AXON2_IN
+	PIN_AXON2_IN,
 };
 
 void neuronInit(neuron_t *n)
@@ -20,20 +20,20 @@ void neuronInit(neuron_t *n)
 	n->hebb_time = 0;
 	n->learning_state = NONE;
 
+	n->leaky_current = 0;
+
 	for (i=0;i<DENDRITE_COUNT;i++){
 		n->dendrites[i].state = OFF;
 		n->dendrites[i].current_value = 0;
 		n->dendrites[i].type = EXCITATORY;
-		n->dendrites[i].timestamp = 0;
-		n->dendrites[i].pulse_time = 0;
-		n->dendrites[i].alive_time = 0;
+		n->dendrites[i].timestamp = LEARNING_WINDOW;
+		n->dendrites[i].pulse_time = LEARNING_WINDOW;
+		n->dendrites[i].alive_time = LEARNING_WINDOW;
 	}
 
-	n->dendrites[0].magnitude = 140;
-	n->dendrites[1].magnitude = 100;
-	n->dendrites[2].magnitude = 100;
-	n->dendrites[3].magnitude = 100;
-	n->dendrites[4].magnitude = 100;
+	n->dendrites[0].magnitude = 15000;
+
+	n->dendrites[0].base_magnitude = 15000;
 	
 	n->dendrite_ping_time[0] = 0;
 	n->dendrite_ping_time[1] = 0;
@@ -45,56 +45,19 @@ void neuronInit(neuron_t *n)
 	n->dendrite_ping_time[7] = 0;
 	n->dendrite_ping_time[8] = 0;
 	n->dendrite_ping_time[9] = 0;
-	n->dendrite_ping_time[10] = 0;
 }
 
-void checkDendrites(neuron_t * n)
+void calcDendriteWeightings(neuron_t * n)
 {
 	uint8_t i;
-	dendrite_states current_state = OFF;
-	
-	for (i=1; i<11; i++){
-		
-		if (dendrite_ping_flag[i] != 0){
-
-			dendrite_ping_flag[i] = 0;
-
-			n->dendrite_ping_time[i] = DEND_PING_TIME;
-		} else if (n->dendrite_ping_time[i] == 1){
-			//setAsInput(active_input_ports[i], input_pins[i]);
-			
-			if (i % 2 != 0){
-				setAsInput(active_input_ports[i+1], complimentary_pins[i]);
-				active_output_pins[i+1] = 0;
-			} else{
-				setAsInput(active_input_ports[i+1], complimentary_pins[i]);
-				active_output_pins[i-1] = 0;
-			}
-			
-		}
-		
-		if (n->dendrite_ping_time[i] > 0){
-			n->dendrite_ping_time[i] -= 1;
-		}
-		
-		if (dendrite_pulse_flag[i] != 0){
-			dendrite_pulse_flag[i] = 0;
-			
-		}
-	}
-	
 	for (i=0; i<DENDRITE_COUNT; i++){
-
-		if(n->dendrites[i].state == ON){
-			n->dendrites[i].pulse_time += 1;
-			if (n->dendrites[i].pulse_time >= PULSE_LENGTH){
-				dendriteSwitchOff(&(n->dendrites[i]));
-			}
+		if (n->dendrites[i].timestamp < LEARNING_WINDOW){
+			n->dendrites[i].magnitude += (LEARNING_WINDOW - n->dendrites[i].timestamp) * LEARNING_CHANGE / LEARNING_WINDOW;
+			if (n->dendrites[i].magnitude > MAX_WEIGHTING)
+				n->dendrites[i].magnitude = MAX_WEIGHTING;
 		}
-		
-		// n->dendrites[i].timestamp++;
+		n->dendrites[i].timestamp = LEARNING_WINDOW;
 	}
-	
 }
 
 void incrementHebbTime(neuron_t * n)
