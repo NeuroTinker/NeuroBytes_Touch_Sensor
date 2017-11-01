@@ -5,6 +5,8 @@
 volatile uint8_t toggle = 0;
 volatile uint8_t tick = 0;
 extern volatile uint8_t main_tick = 0;
+volatile uint8_t read_tick = 0;
+
 
 void clock_setup(void)
 {
@@ -15,18 +17,29 @@ void clock_setup(void)
 
 void sys_tick_handler(void)
 {
-    // gpio_toggle(PORT_AXON_OUT, PIN_AXON_OUT);
+    if (++tick >= 50){
+		main_tick = 1;
+		tick = 0;
+	}
+
+	if (read_tick++ >= 2){
+		writeBit();
+		read_tick = 0;
+	}
+
+	readInputs();
+	
+    MMIO32((TIM21_BASE) + 0x10) &= ~(1<<0); //clear the interrupt register
 }
 
 void systick_setup(int xms)
 {
-	
     systick_set_clocksource(STK_CSR_CLKSOURCE_EXT);
     STK_CVR = 0;
-    systick_set_reload(2000 * xms);
+    //systick_set_reload(2 * xms);
+	systick_set_reload(180); //180
     systick_counter_enable();
     systick_interrupt_enable();
-	
 }
 
 void gpio_setup(void)
@@ -241,8 +254,8 @@ void tim_setup(void)
     /*    Enable TIM21 counter: */
     MMIO32((TIM21_BASE) + 0x00) |= (1<<0);
 
-	nvic_enable_irq(NVIC_TIM21_IRQ);
-    nvic_set_priority(NVIC_TIM21_IRQ, 1);
+	//nvic_enable_irq(NVIC_TIM21_IRQ);
+    //nvic_set_priority(NVIC_TIM21_IRQ, 1);
 }
 
 

@@ -164,7 +164,7 @@ extern uint8_t identify_channel;
 
 void readInputs(void); // The readInputs() function reads incoming messages and decides if it the data frame should be sent to a handler based off of sender id and message id.
 
-void write(void);
+void writeBit(void);
 void writeAll(void);
 void writeDownstream(void);
 void writeNID(void);
