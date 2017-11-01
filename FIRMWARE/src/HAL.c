@@ -27,7 +27,7 @@ void sys_tick_handler(void)
 		read_tick = 0;
 	}
 
-	readInputs();
+	//readInputs();
 	
     MMIO32((TIM21_BASE) + 0x10) &= ~(1<<0); //clear the interrupt register
 }
