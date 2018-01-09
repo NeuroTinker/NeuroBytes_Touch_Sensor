@@ -15,7 +15,7 @@
 #define DATA_TIME			10
 #define DEND_PING_TIME		200 // 1000 ms
 #define	NID_PING_TIME		200 // 1000 ms
-#define SEND_PING_TIME		80 // 80
+#define SEND_PING_TIME		50 // 80
 #define BUTTON_PRESS_TIME	2
 #define BUTTON_HOLD_TIME    100
 #define MECHANORECEPTOR_PRESS_TIME	2
