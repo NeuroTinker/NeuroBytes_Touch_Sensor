@@ -36,11 +36,11 @@ $Descr B 17000 11000
 encoding utf-8
 Sheet 1 1
 Title "NeuroBytes Touch Sensor"
-Date "2017-10-03"
-Rev "C"
+Date "2018-02-13"
+Rev "D"
 Comp "NeuroTinker, LLC"
-Comment1 "License: GPL v3"
-Comment2 ""
+Comment1 "(C) 2018 Zach Fredin"
+Comment2 "License: CC-BY_SA 4.0"
 Comment3 ""
 Comment4 ""
 $EndDescr
@@ -483,10 +483,10 @@ Wire Wire Line
 	2000 2100 2800 2100
 Wire Wire Line
 	5000 5100 5250 5100
-Text GLabel 6050 5100 2    60   Input ~ 0
+Text GLabel 6950 5100 2    60   Input ~ 0
 IDENTIFY
 Wire Wire Line
-	6050 5100 5850 5100
+	5850 5100 6950 5100
 Text GLabel 2600 3450 0    60   Input ~ 0
 IDENTIFY
 $Comp
@@ -539,12 +539,12 @@ F 9 "Yes" H 5550 5850 60  0001 C CNN "RoHS"
 	1    5550 5850
 	1    0    0    -1  
 $EndComp
-Text GLabel 6050 5850 2    60   Input ~ 0
+Text GLabel 6950 5850 2    60   Input ~ 0
 INPUT
 Wire Wire Line
 	5000 5850 5250 5850
 Wire Wire Line
-	5850 5850 6050 5850
+	5850 5850 6950 5850
 Text GLabel 5400 3450 2    60   Input ~ 0
 INPUT
 $Comp
@@ -891,4 +891,57 @@ Text Notes 4850 6750 0    60   ~ 0
 IDENTIFICATION SWITCH AND MECHANORECEPTOR
 Text Notes 9600 3800 0    60   ~ 0
 LED
+$Comp
+L RClamp0503F U3
+U 1 1 5A836509
+P 6600 4550
+F 0 "U3" H 6600 4150 60  0000 C CNN
+F 1 "RClamp0503F" H 6600 4950 60  0000 C CNN
+F 2 "KiCad_Footprints:ZF_SMD_SOT-353" H 6750 4400 60  0001 C CNN
+F 3 "" H 6750 4400 60  0001 C CNN
+F 4 "No" H 6600 4550 60  0001 C CNN "Subs Allowed"
+F 5 "Yes" H 6600 4550 60  0001 C CNN "RoHS"
+	1    6600 4550
+	1    0    0    -1  
+$EndComp
+$Comp
+L +3.3V #PWR018
+U 1 1 5A8365D6
+P 7250 4150
+F 0 "#PWR018" H 7250 4000 50  0001 C CNN
+F 1 "+3.3V" H 7250 4290 50  0000 C CNN
+F 2 "" H 7250 4150 50  0001 C CNN
+F 3 "" H 7250 4150 50  0001 C CNN
+	1    7250 4150
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7250 4150 7250 4350
+Wire Wire Line
+	7250 4350 7050 4350
+Wire Wire Line
+	6050 5100 6050 4750
+Wire Wire Line
+	6050 4750 6150 4750
+Connection ~ 6050 5100
+Wire Wire Line
+	5950 5850 5950 4350
+Wire Wire Line
+	5950 4350 6150 4350
+Connection ~ 5950 5850
+$Comp
+L GND #PWR019
+U 1 1 5A836B05
+P 5850 4750
+F 0 "#PWR019" H 5850 4500 50  0001 C CNN
+F 1 "GND" H 5850 4600 50  0000 C CNN
+F 2 "" H 5850 4750 50  0001 C CNN
+F 3 "" H 5850 4750 50  0001 C CNN
+	1    5850 4750
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5850 4750 5850 4550
+Wire Wire Line
+	5850 4550 6150 4550
 $EndSCHEMATC
