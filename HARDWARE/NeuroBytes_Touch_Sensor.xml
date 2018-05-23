@@ -2,17 +2,17 @@
 <export version="D">
   <design>
     <source>/home/zach/Documents/NeuroTinker/Products/NeuroBytes_Touch_Sensor/HARDWARE/NeuroBytes_Touch_Sensor.sch</source>
-    <date>Fri 22 Sep 2017 04:50:09 PM CDT</date>
-    <tool>Eeschema 4.0.7-e1-6374~58~ubuntu14.04.1</tool>
+    <date>Wed 23 May 2018 05:36:58 PM CDT</date>
+    <tool>Eeschema 4.0.7-e2-6376~58~ubuntu14.04.1</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
         <title>NeuroBytes Touch Sensor</title>
         <company>NeuroTinker, LLC</company>
-        <rev>B</rev>
-        <date>2017-05-16</date>
+        <rev>D</rev>
+        <date>2018-02-13</date>
         <source>NeuroBytes_Touch_Sensor.sch</source>
-        <comment number="1" value="License: GPL v3"/>
-        <comment number="2" value=""/>
+        <comment number="1" value="(C) 2018 Zach Fredin"/>
+        <comment number="2" value="License: CC-BY_SA 4.0"/>
         <comment number="3" value=""/>
         <comment number="4" value=""/>
       </title_block>
@@ -45,7 +45,7 @@
         <field name="Subs Allowed">No</field>
         <field name="RoHS">Yes</field>
       </fields>
-      <libsource lib="conn" part="CONN_01X04"/>
+      <libsource lib="NeuroBytes_Touch_Sensor-cache" part="CONN_01X04"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>58B5B32F</tstamp>
     </comp>
@@ -75,7 +75,7 @@
         <field name="Subs Allowed">Yes</field>
         <field name="RoHS">Yes</field>
       </fields>
-      <libsource lib="regul" part="LD3985G33R"/>
+      <libsource lib="NeuroBytes_Touch_Sensor-cache" part="LD3985G33R"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>58B5C9D0</tstamp>
     </comp>
@@ -240,7 +240,7 @@
         <field name="Subs Allowed">No</field>
         <field name="RoHS">Yes</field>
       </fields>
-      <libsource lib="conn" part="CONN_01X05"/>
+      <libsource lib="NeuroBytes_Touch_Sensor-cache" part="CONN_01X05"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>598DF7EC</tstamp>
     </comp>
@@ -330,7 +330,7 @@
         <field name="Subs Allowed">No</field>
         <field name="RoHS">Yes</field>
       </fields>
-      <libsource lib="conn" part="CONN_01X04"/>
+      <libsource lib="NeuroBytes_Touch_Sensor-cache" part="CONN_01X04"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>59C59EBF</tstamp>
     </comp>
@@ -366,6 +366,31 @@
     </comp>
   </components>
   <libparts>
+    <libpart lib="transistors" part="BC817">
+      <aliases>
+        <alias>BC818</alias>
+        <alias>BC847</alias>
+        <alias>BC848</alias>
+        <alias>BC849</alias>
+        <alias>BC850</alias>
+        <alias>MMBT3904</alias>
+      </aliases>
+      <description>45V Vce, 0.8A Ic, NPN, SOT-23</description>
+      <docs>http://www.fairchildsemi.com/ds/BC/BC817.pdf</docs>
+      <footprints>
+        <fp>SOT?23*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">Q</field>
+        <field name="Value">BC817</field>
+        <field name="Footprint">TO_SOT_Packages_SMD:SOT-23</field>
+      </fields>
+      <pins>
+        <pin num="1" name="B" type="input"/>
+        <pin num="2" name="E" type="passive"/>
+        <pin num="3" name="C" type="passive"/>
+      </pins>
+    </libpart>
     <libpart lib="device" part="C">
       <description>Unpolarized capacitor</description>
       <footprints>
@@ -380,8 +405,7 @@
         <pin num="2" name="~" type="passive"/>
       </pins>
     </libpart>
-    <libpart lib="conn" part="CONN_01X04">
-      <description>Connector, single row, 01x04, pin header</description>
+    <libpart lib="NeuroBytes_Touch_Sensor-cache" part="CONN_01X04">
       <footprints>
         <fp>Pin_Header_Straight_1X*</fp>
         <fp>Pin_Header_Angled_1X*</fp>
@@ -399,8 +423,7 @@
         <pin num="4" name="P4" type="passive"/>
       </pins>
     </libpart>
-    <libpart lib="conn" part="CONN_01X05">
-      <description>Connector, single row, 01x05, pin header</description>
+    <libpart lib="NeuroBytes_Touch_Sensor-cache" part="CONN_01X05">
       <footprints>
         <fp>Pin_Header_Straight_1X*</fp>
         <fp>Pin_Header_Angled_1X*</fp>
@@ -419,7 +442,7 @@
         <pin num="5" name="P5" type="passive"/>
       </pins>
     </libpart>
-    <libpart lib="regul" part="LD3985G122R">
+    <libpart lib="NeuroBytes_Touch_Sensor-cache" part="LD3985G122R">
       <aliases>
         <alias>LD3985G18R</alias>
         <alias>LD3985G25R</alias>
@@ -430,8 +453,6 @@
         <alias>LD3985G33R</alias>
         <alias>LD3985G47R</alias>
       </aliases>
-      <description>150 mA Low Dropout Voltage Regulator, Fixed Output 1.22V, TSOT-23-5</description>
-      <docs>http://www.st.com/internet/com/TECHNICAL_RESOURCES/TECHNICAL_LITERATURE/DATASHEET/CD00003395.pdf</docs>
       <footprints>
         <fp>TSOT*</fp>
       </footprints>
@@ -459,23 +480,6 @@
         <pin num="2" name="A" type="passive"/>
         <pin num="3" name="BK" type="passive"/>
         <pin num="4" name="GK" type="passive"/>
-      </pins>
-    </libpart>
-    <libpart lib="transistors" part="MMBT3904">
-      <description>40V Vce, 0.2A Ic, NPN, Small Signal Transistor, SOT-23</description>
-      <docs>http://www.nxp.com/documents/data_sheet/MMBT3904.pdf</docs>
-      <footprints>
-        <fp>SOT-23*</fp>
-      </footprints>
-      <fields>
-        <field name="Reference">Q</field>
-        <field name="Value">MMBT3904</field>
-        <field name="Footprint">TO_SOT_Packages_SMD:SOT-23</field>
-      </fields>
-      <pins>
-        <pin num="1" name="B" type="input"/>
-        <pin num="2" name="E" type="passive"/>
-        <pin num="3" name="C" type="passive"/>
       </pins>
     </libpart>
     <libpart lib="device" part="R">
@@ -541,20 +545,17 @@
     </libpart>
   </libparts>
   <libraries>
-    <library logical="NeuroTinker_schematic_symbols">
-      <uri>/home/zach/Documents/NeuroTinker/Products/NeuroBytes_Touch_Sensor/HARDWARE/NeuroBytes_Schematic_Lib/NeuroTinker_schematic_symbols.lib</uri>
-    </library>
-    <library logical="conn">
-      <uri>/usr/share/kicad/library/conn.lib</uri>
+    <library logical="device">
+      <uri>/usr/share/kicad/library/device.lib</uri>
     </library>
     <library logical="transistors">
       <uri>/usr/share/kicad/library/transistors.lib</uri>
     </library>
-    <library logical="device">
-      <uri>/usr/share/kicad/library/device.lib</uri>
+    <library logical="NeuroBytes_Touch_Sensor-cache">
+      <uri>/home/zach/Documents/NeuroTinker/Products/NeuroBytes_Touch_Sensor/HARDWARE/NeuroBytes_Touch_Sensor-cache.lib</uri>
     </library>
-    <library logical="regul">
-      <uri>/usr/share/kicad/library/regul.lib</uri>
+    <library logical="NeuroTinker_schematic_symbols">
+      <uri>/home/zach/Documents/NeuroTinker/Products/NeuroBytes_Touch_Sensor/HARDWARE/NeuroBytes_Schematic_Lib/NeuroTinker_schematic_symbols.lib</uri>
     </library>
   </libraries>
   <nets>

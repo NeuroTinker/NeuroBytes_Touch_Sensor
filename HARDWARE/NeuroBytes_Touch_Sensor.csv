@@ -1,18 +1,4 @@
-Title,NeuroBytes Touch Sensor
-Revision,B
-Date,2017-05-16
-Generated,Fri 22 Sep 2017 04:50:09 PM CDT
-Company,NeuroTinker, LLC
-Comment 1,License: GPL v3
-Comment 2,
-Comment 3,
-Comment 4,
-Total Parts,23
-Total Unique Parts,15
-
-
-
-Ref,Qty,Value,Link,Mfr,Mfr Part #,Package,RoHS,Subs Allowed,
+Ref,Qty,Value,Link,Mfr,Mfr Part #,Package,RoHS,Subs Allowed
 C1 C4 ,2,1u,https://www.digikey.com/product-detail/en/taiyo-yuden/LMK107B7105KA-T/587-1242-2-ND/930594,Taiyo Yuden,LMK107B7105KA-T,C0603,Yes,Yes
 C5 C3 ,2,0u1,https://www.digikey.com/product-detail/en/taiyo-yuden/LMK105BJ104KV-F/587-1227-2-ND/930579,Taiyo Yuden,LMK105BJ104KV-F,C0402,Yes,Yes
 C2 ,1,10u,https://www.digikey.com/product-detail/en/taiyo-yuden/EMK316B7106KL-TD/587-2395-2-ND/2178914,Taiyo Yuden,EMK316B7106KL-TD ,C1206,Yes,Yes
@@ -28,9 +14,9 @@ SW1 ,1,SW_PUSH,https://www.digikey.com/product-detail/en/e-switch/TL3330AF130QG/
 SW2 ,1,SW_SNAP_ACTION,https://www.digikey.com/product-detail/en/c-k/ZMA00A080S06PC/CKN10156-ND/2044492,C&K,ZMA00A080S06PC,THT (SMT side mtg),Yes,No
 U1 ,1,STM32L011Gx,http://www.mouser.com/ProductDetail/STMicroelectronics/STM32L011G4U6/?qs=sGAEpiMZZMuoKKEcg8mMKFZaGHZhaFFC%252b5Ex1OjcSxhBnExI6VEL3Q%3d%3d,ST Microelectronics,STM32L011G4U6,UFQFPN28,Yes,No
 U2 ,1,3v3 LDO,https://www.digikey.com/product-detail/en/on-semiconductor/NCP114BSN330T1G/NCP114BSN330T1GOSTR-ND/6560606,ON Semiconductor,NCP114BSN330T1G,SOT23-5L,Yes,Yes
-
-
-
-
-BOM made with KICAD_BOM_WIZARD (https://github.com/HashDefineElectronics/KiCad_BOM_Wizard.git)
-Generated Fri 22 Sep 2017 04:50:09 PM CDT
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
+BOM made with KICAD_BOM_WIZARD (https://github.com/HashDefineElectronics/KiCad_BOM_Wizard.git),,,,,,,,
+Generated Wed 23 May 2018 05:36:58 PM CDT,,,,,,,,
