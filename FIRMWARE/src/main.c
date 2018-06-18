@@ -6,28 +6,24 @@
 #include <libopencm3/cm3/nvic.h>
 #include <libopencm3/cm3/systick.h>
 #include <libopencm3/stm32/exti.h>
+#include <libopencm3/stm32/usart.h>
 
-#include "comm.h"
 #include "HAL.h"
+#include "comm.h"
 #include "neuron.h"
 
-#define BLINK_TIME			100
+#define BLINK_TIME			40
 #define DATA_TIME			10
 #define DEND_PING_TIME		200 // 1000 ms
 #define	NID_PING_TIME		200 // 1000 ms
-#define SEND_PING_TIME		50 // 80
+#define SEND_PING_TIME		80
 #define BUTTON_PRESS_TIME	2
 #define BUTTON_HOLD_TIME    100
+#define LPUART_SETUP_TIME	100
+#define CHANGE_NID_TIME 	200
 #define MECHANORECEPTOR_PRESS_TIME	2
 #define MECHANORECEPTOR_ADAPT_START	35
 #define MECHANORECEPTOR_ADAPT_END	150
-
-static uint32_t fingerprint[3] __attribute__((section (".fingerprint"))) __attribute__ ((__used__)) = {
-	5, // device id
-	1, // firmware version
-	0  // unique id
-};
-
 
 int main(void)
 {
@@ -40,6 +36,11 @@ int main(void)
 	uint16_t	fire_delay_time = 0;
 	int16_t 	depression_time = 0;
 	uint8_t		fire_flag = 0;
+	uint8_t		change_nid_time = 0;
+	int16_t		fire_data = 0; // hack to make sure a pulse sends peak neuron potential and hyperpolarization  data
+	uint16_t	fire_delay_time_reset = FIRE_DELAY_TIME;
+	fire_delay_time_reset = 40; // temporary
+	uint16_t	fire_delay_overflow = 0; // used if firing period is less than delay time.
 
 	// button debounce variables
 	uint16_t	button_press_time = 0; 
@@ -51,10 +52,7 @@ int main(void)
 	uint32_t	mechanoreceptor_adapt_count = 0;
 	uint32_t 	mechanoreceptor_adapt_reset = 0;
 
-	// current channel used to communicate to NID (e.g. CH. 1). 0 if neuron has not been selected by NID
-	uint32_t	nid_channel = 0b000;
-
-	uint32_t	message = 0; // staging variable for constructing messages to send to the communications routine
+	message_t	message = 0; // staging variable for constructing messages to send to the communications routine
 
 	int32_t joegenta = 0;
 
@@ -69,31 +67,50 @@ int main(void)
 
 	// setup hardware
 	clock_setup();
-	systick_setup(100); // systick in microseconds
+	systick_setup(); // systick in microseconds
 	gpio_setup();
 	tim_setup();
 
 	// main processing routine	
 	for(;;)
 	{
-		if (main_tick == 1){
+		if (main_tick == 1 && pause_flag == 0){
 			// main tick every 5 ms
 			main_tick = 0;
 			//gpio_set(PORT_AXON1_EX, PIN_AXON1_EX);
 
 			// check to see if nid ping hasn't been received in last NID_PING_TIME ticks
-			if (nid_ping_time++ > NID_PING_TIME){
-				// nid no longer connected
-				nid_keep_alive = NID_PING_KEEP_ALIVE; // reset nid_keep_alive
-				nid_pin = 0; // clear the nid pin
-				nid_pin_out = 0;
+			if (nid_ping_time > 0){
+				nid_ping_time -= 1;
+				if (nid_ping_time == 0){
+					// nid no longer connected
+					nid_distance = 100; // reset nid_keep_alive
+					nid_pin = 0; // clear the nid pin
+					nid_pin_out = 0;
+					nid_i = NO_NID_I;
+				}
 			}
 			
+			if (change_nid_time++ > CHANGE_NID_TIME){
+				change_nid_time = 0;
+				closer_distance = nid_distance;
+				closer_ping_count = 0;
+			}
+
 			// send a downstream ping every SEND_PING_TIME ticks
 			if (send_ping_time++ > SEND_PING_TIME){
 				// send downstream ping through axon
 				addWrite(DOWNSTREAM_BUFF, DEND_PING);
 				send_ping_time = 0;
+			}
+
+			if (lpuart_setup_time < LPUART_SETUP_TIME){
+				lpuart_setup_time += 1;
+			} else if (lpuart_setup_time == LPUART_SETUP_TIME){
+				lpuart_setup_time += 1;
+				#ifndef DBG
+				lpuart_setup();
+				#endif
 			}
 
 			/*
@@ -106,14 +123,12 @@ int main(void)
 
 			// check for clear channel command
 			if (identify_time < IDENTIFY_TIME){
-				identify_time += 1;
-				if (identify_channel == 0){
-					// setting identify channel 0 clears identify_channel
-					nid_channel = 0;
-				} else if (identify_channel == nid_channel && identify_time == 0){
-					// clear nid_channel if NID is trying to set a new NeuroByte to the current nid_channel
-					nid_channel = 0;
+				if (identify_time == 0){
+					if ((identify_channel == 0) || (identify_channel == nid_channel)){
+						nid_channel = 0;
+					}
 				}
+				identify_time += 1;
 			}
 
 			// check buttons
@@ -125,10 +140,8 @@ int main(void)
 				// debounce
 				button_press_time += 1;
 				if (button_press_time >= BUTTON_HOLD_TIME){
-				/*	learning mode disabled for touch sensory neuron
 					button_armed = 2;
-					blink_flag = 1;
-				*/
+					// blink_flag = 1;
 				} else if (button_press_time >= BUTTON_PRESS_TIME){
 					button_armed = 1;
 				}
@@ -136,21 +149,16 @@ int main(void)
 				// button not pressed
 				if (button_armed == 0){
 					button_press_time = 0;
-				} else if (button_armed == 1){
-					if (identify_time < IDENTIFY_TIME){
-						nid_channel = identify_channel;
-					} else{
-						// temporarily use identify button also as an impulse button
-						neuron.fire_potential += 11000;
-						//neuron.leaky_current += 20;
-					}
+				} else if (button_armed == 1 && nid_i != NO_NID_I){
+					nid_channel = identify_channel;
+					message.length = 32;
+					message.message = (((uint32_t) DATA_TYPE_MESSAGE) | (((uint32_t) nid_channel) << 22));
+					message.message |=  ((const uint16_t) (getFingerprint()));
+					addWrite(NID_BUFF, (const message_t) message);
+					identify_time = 1;
 					button_armed = 0;
 				} else if (button_armed == 2){
-					if (neuron.learning_state == NONE){
-						neuron.learning_state = HEBB;
-					} else if (neuron.learning_state == HEBB){
-						neuron.learning_state = NONE;
-					}
+					// put button held logic here
 					button_armed = 0;
 				}
 				button_press_time = 0;
@@ -180,19 +188,28 @@ int main(void)
 				mechanoreceptor_press_time = 0;
 			}	
 
-
 			// send current membrane potential to NID if currently identified by NID
 			if (nid_channel != 0){
 				// send data every DATA_TIME ticks
 				if (data_time++ > DATA_TIME){
+					if (fire_data > 0){
+						if (fire_data == 1){
+							message.message = (((uint32_t) DATA_MESSAGE)) | ((uint16_t) HYPERPOLARIZATION);
+							fire_data = 0;						
+						} else {
+							message.message = (((uint32_t) DATA_MESSAGE)) | ((uint16_t) fire_data);	
+							fire_data = 1;						
+						}
+					} else {
+						message.message = (((uint32_t) DATA_MESSAGE)) | ((uint16_t) neuron.potential);						
+					}
 					data_time = 0;
-					message = DATA_MESSAGE | (uint16_t) neuron.potential | (nid_channel << 19) | (nid_keep_alive << 22);
-					addWrite(NID_BUFF,message);
+					message.length = 32;
+					message.message |= (nid_channel << 22);
+					addWrite(NID_BUFF,(const message_t) message);
 				}
 			}
 
-			getFingerprint();
-			
 			// decay old dendrite contributions to the membrane potential
 			dendriteDecayStep(&neuron);
 			// decay the firing potential
@@ -212,43 +229,30 @@ int main(void)
 				for (i=0; i<DENDRITE_COUNT; i++){
 					neuron.dendrites[i].current_value = 0;
 					neuron.dendrites[i].state = OFF;
-					if (neuron.learning_state == HEBB){
-						calcDendriteWeightings(&neuron);
-					}
 				}
-				if (neuron.learning_state == HEBB){
-					calcDendriteWeightings(&neuron);
-				}
-				depression_time = 0;
+
+				fire_data = neuron.potential; // hack to send fire data to NID
 
 				// send downstream pulse
-				fire_delay_time = FIRE_DELAY_TIME;
+				if (fire_delay_time == 0){
+					fire_delay_time = fire_delay_time_reset;
+					fire_delay_overflow = 0;
+				} else {
+					fire_delay_overflow = fire_delay_time_reset - fire_delay_time;
+				}
 				fire_flag = 1;
+			} else if (neuron.potential < HYPERPOLARIZATION) {
+				neuron.potential = HYPERPOLARIZATION;
 			}
 
 			if (fire_delay_time > 0){
 				fire_delay_time -= 1;
 			} else if (fire_flag == 1){
+				if (fire_delay_overflow > 0)
+					fire_delay_time = fire_delay_overflow; // TODO: make this an actual FIFO buffer of fire timings
 				fire_flag = 0;
-				addWrite(DOWNSTREAM_BUFF, PULSE_MESSAGE);
+				addWrite(DOWNSTREAM_BUFF, pulse_message);
 			}
-			
-			if (neuron.learning_state == HEBB){
-
-				if (++depression_time >= DEPRESSION_TIME){
-					for (i=0; i<DENDRITE_COUNT; i++){
-						neuron.dendrites[i].magnitude -= neuron.dendrites[i].base_magnitude;
-						neuron.dendrites[i].magnitude *= 511;
-						neuron.dendrites[i].magnitude /= 512;
-						neuron.dendrites[i].magnitude += neuron.dendrites[i].base_magnitude;
-					}
-				}		
-			}	
-			joegenta = 0;
-			for (i=0; i<DENDRITE_COUNT; i++){
-				joegenta += neuron.dendrites[i].magnitude - neuron.dendrites[i].base_magnitude;
-			}
-			
 
 			/*
 				LED is either:
@@ -256,6 +260,7 @@ int main(void)
 				-full white if neuron is firing
 				-in an RGB state mapped to membrane potential
 			*/
+			
 			if (blink_flag != 0){
 				setLED(200,0,300);
 				blink_time = 1;
@@ -271,40 +276,26 @@ int main(void)
 					neuron.state = INTEGRATE;
 				}
 				if (neuron.learning_state == HEBB){
-					setLED(200,100,200);
+					// needs to vary between 50 and 320
+					joegenta /= 256;
+					joegenta *= 3;
+					joegenta += 100;
+					if (joegenta > 350) joegenta = 350;
+					setLED(joegenta, joegenta, joegenta);
 				} else{
 					LEDFullWhite();
 				}
 			} else if (neuron.state == INTEGRATE){
-				if (neuron.learning_state == HEBB){
-					if (neuron.potential > 5000){
-						setLED((neuron.potential / 50), (200 - neuron.potential / 50) / 2, 0);
-					} else{
-						joegenta /= 8;
-						if (joegenta / 80 > 240){
-							setLED(180,0,180);
-						} else if (joegenta > 0){
-							setLED(40 + joegenta, 0, 40 + joegenta);
-						} else if (joegenta < -10000){
-							setLED(40,0, 40);
-						} else if (joegenta < 0){
-							setLED(40, 0, 40);
-						} else{
-							setLED(40,0,40);
-						}
-					}
+				if (neuron.potential > 10000){
+					setLED(200,0,0);
+				} else if (neuron.potential > 0){
+					setLED(neuron.potential / 50, 200 - (neuron.potential / 50), 0);
+				} else if (neuron.potential < -10000){
+					setLED(0,0, 200);
+				} else if (neuron.potential < 0){
+					setLED(0, 200 + (neuron.potential / 50), -1 * neuron.potential / 50);
 				} else{
-					if (neuron.potential > 10000){
-						setLED(200,0,0);
-					} else if (neuron.potential > 0){
-						setLED(neuron.potential / 50, 200 - (neuron.potential / 50), 0);
-					} else if (neuron.potential < -10000){
-						setLED(0,0, 200);
-					} else if (neuron.potential < 0){
-						setLED(0, 200 + (neuron.potential / 50), -1 * neuron.potential / 50);
-					} else{
-						setLED(0,200,0);
-					}
+					setLED(0,200,0);
 				}
 			}
 		}

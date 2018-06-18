@@ -1,12 +1,59 @@
 
 #include "HAL.h"
-#include "comm.h"
 
-volatile uint8_t toggle = 0;
 volatile uint8_t tick = 0;
-extern volatile uint8_t main_tick = 0;
+volatile uint8_t main_tick = 0;
 volatile uint8_t read_tick = 0;
 
+volatile uint16_t active_input_pins[NUM_INPUTS] = {[0 ... NUM_INPUTS-1] = 0};
+
+volatile uint8_t active_input_tick[NUM_INPUTS] = {[0 ... NUM_INPUTS-1] = 0};
+
+volatile uint16_t active_output_pins[NUM_INPUTS] = {PIN_AXON1_EX, PIN_AXON2_EX};
+
+volatile uint32_t dendrite_pulses[NUM_DENDS] = {[0 ... NUM_DENDS-1] = 0};
+volatile uint8_t dendrite_pulse_count = 0;
+
+/* 
+
+All available input pins are:
+
+PIN_AXON1_IN,
+PIN_AXON2_IN,
+
+*/
+
+uint32_t active_input_ports[NUM_INPUTS] = {
+    PORT_AXON1_IN,
+    PORT_AXON2_IN,
+};
+
+uint32_t active_output_ports[NUM_INPUTS] = {
+    PORT_AXON1_EX,
+    PORT_AXON2_EX,
+};
+
+const uint16_t complimentary_pins[NUM_INPUTS] = {
+    PIN_AXON1_EX,
+    PIN_AXON2_EX,
+};
+
+const uint32_t complimentary_ports[NUM_INPUTS] = {
+    PORT_AXON1_EX,
+    PORT_AXON2_EX,
+};
+
+volatile uint8_t dendrite_pulse_flag[NUM_INPUTS] = {[0 ... NUM_INPUTS-1] = 0};
+volatile uint8_t dendrite_ping_flag[NUM_INPUTS] = {[0 ... NUM_INPUTS-1] = 0};
+
+
+static const uint32_t fingerprint[3] __attribute__((section (".fingerprint"))) __attribute__ ((__used__)) = {
+	5, // device id
+	2, // firmware version
+	0  // unique id
+};
+
+bool checkVersion(device_id, version) {return (device_id == fingerprint[0]) && (version = fingerprint[1]) ? true : false;}
 
 void clock_setup(void)
 {
@@ -27,7 +74,7 @@ void sys_tick_handler(void)
 		read_tick = 0;
 	}
 
-	//readInputs();
+	readBit(read_tick);
 	
     MMIO32((TIM21_BASE) + 0x10) &= ~(1<<0); //clear the interrupt register
 }
@@ -93,10 +140,53 @@ void gpio_setup(void)
 	nvic_set_priority(NVIC_EXTI4_15_IRQ, 0);
 }
 
+void lpuart_setup(void)
+{
+	// seutp lpuart interface (for communicating with NID)
+	// NOTE: this ocnverts the swd interface to lpuart so debugging with swd will be disables
+	rcc_periph_clock_enable(RCC_LPUART1);
+
+	gpio_mode_setup(PORT_LPUART1_RX, GPIO_MODE_AF, GPIO_PUPD_NONE, PIN_LPUART1_RX);
+	gpio_mode_setup(PORT_LPUART1_TX, GPIO_MODE_AF, GPIO_PUPD_NONE, PIN_LPUART1_TX);
+
+	gpio_set_af(PORT_LPUART1_RX, GPIO_AF6, PIN_LPUART1_RX);
+	gpio_set_af(PORT_LPUART1_TX, GPIO_AF6, PIN_LPUART1_TX);
+
+	USART_BRR(LPUART1) = 0x1A0AA; // 38400 baud
+	usart_set_databits(LPUART1, 8);  // USART_CR1_M
+	usart_set_stopbits(LPUART1, USART_STOPBITS_1); //USART_CR2_STOP
+	usart_set_mode(LPUART1, USART_MODE_TX_RX); //USART_CR1_RE USART_CR1_TE
+	usart_set_parity(LPUART1, USART_PARITY_NONE);// USART_CR1_PS USART_CR1_PCE
+	usart_set_flow_control(LPUART1, USART_FLOWCONTROL_NONE); // USART_CR3_RTSE USART_CR3_CTSE
+
+	usart_enable(LPUART1); // USART_CR1_UE
+
+	// enable interrupts
+	nvic_enable_irq(NVIC_LPUART1_IRQ);
+	usart_enable_rx_interrupt(LPUART1); // USART_CR1_RXNEIE
+    USART_CR1(LPUART1) |= USART_CR1_RE;
+    USART_CR1(LPUART1) |= USART_CR1_TE;
+}
+
+void lpuart1_isr(void)
+{
+    if ((USART_ISR(LPUART1) & USART_ISR_RXNE) != 0){
+        readNID();
+        USART_RQR(LPUART1) = 0b1000;
+        USART_CR1(LPUART1) |= USART_CR1_RE;
+    } else if ((USART_ISR(LPUART1) & USART_ISR_TXE) != 0){
+        /* USART_CR1(LPUART1) |= USART_CR1_TE; */
+        writeNID();
+        USART_RQR(LPUART1) |= USART_RQR_TXFRQ;
+    }
+    USART_ICR(LPUART1) = USART_ISR(LPUART1);
+}
+
 void setAsInput(uint32_t port, uint32_t pin)
 {
 	// setup gpio as an input pin
 	gpio_mode_setup(port, GPIO_MODE_INPUT, GPIO_PUPD_PULLDOWN, pin);
+	gpio_set_output_options(port, GPIO_OTYPE_PP, GPIO_OSPEED_LOW, pin);
 
 	// setup interrupt for the pin going high
 	exti_select_source(pin, port);
@@ -227,39 +317,6 @@ void tim_setup(void)
     //nvic_set_priority(NVIC_TIM21_IRQ, 1);
 }
 
-
-void tim21_isr(void)
-{
-	/*
-		TIM21 is the communication clock. 
-		Each interrupt is one read and write of gpios.
-		Interrupts occur every 100 us.
-	*/
-
-	if (++tick >= 50){
-		main_tick = 1;
-		tick = 0;
-	}
-
-	readInputs();
-	write();
-
-	// temp NID debug clk
-	//gpio_toggle(PORT_DEND3_IN, PIN_DEND3_IN);
-
-	/*
-	if (write_count == 0){
-		if (downstream_write_buffer_ready != 0){
-			writeDownstream();
-		} else if (nid_write_buffer_ready != 0){
-			writeNID();
-		}
-	}
-	*/
-	
-    MMIO32((TIM21_BASE) + 0x10) &= ~(1<<0); //clear the interrupt register
-}
-
 void tim2_isr(void)
 {
 	
@@ -271,20 +328,20 @@ void tim2_isr(void)
 
 void LEDFullWhite(void) 
 {
-	timer_set_oc_value(TIM2, TIM_OC1, 500);
-	timer_set_oc_value(TIM2, TIM_OC2, 500);
-	timer_set_oc_value(TIM2, TIM_OC3, 500);
+	timer_set_oc_value(TIM2, TIM_OC2, 150);
+	timer_set_oc_value(TIM2, TIM_OC3, 150);
+	timer_set_oc_value(TIM2, TIM_OC4, 150);
 }
 
 void setLED(uint16_t r, uint16_t g, uint16_t b)
 {
 	if (r <= 1023) 
 	{
-		timer_set_oc_value(TIM2, TIM_OC1, gamma_lookup[r]);
+		timer_set_oc_value(TIM2, TIM_OC4, gamma_lookup[r]);
 	}
 	else 
 	{
-		timer_set_oc_value(TIM2, TIM_OC1, 2047);
+		timer_set_oc_value(TIM2, TIM_OC4, 2047);
 	}
 
 	if (g <= 1023) 
@@ -306,10 +363,11 @@ void setLED(uint16_t r, uint16_t g, uint16_t b)
 	}
 }
 
-uint8_t getFingerprint(void)
+const uint16_t getFingerprint(void)
 {
-	return device_id;
+	return fingerprint[0];
 }
+
 
 static const uint16_t gamma_lookup[1024] = {
 	/*	Gamma = 2, input range = 0-1023, output range = 0-2047 */
@@ -376,4 +434,5 @@ static const uint16_t gamma_lookup[1024] = {
   1803,1806,1810,1814,1818,1821,1825,1829,1833,1837,1840,1844,1848,1852,1856,1859,
   1863,1867,1871,1875,1879,1882,1886,1890,1894,1898,1902,1905,1909,1913,1917,1921,
   1925,1929,1933,1936,1940,1944,1948,1952,1956,1960,1964,1968,1972,1976,1980,1983,
-1987,1991,1995,1999,2003,2007,2011,2015,2019,2023,2027,2031,2035,2039,2043,2047 };
+  1987,1991,1995,1999,2003,2007,2011,2015,2019,2023,2027,2031,2035,2039,2043,2047 };
+
