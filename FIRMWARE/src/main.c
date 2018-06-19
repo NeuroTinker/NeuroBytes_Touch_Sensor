@@ -41,6 +41,7 @@ int main(void)
 	uint16_t	fire_delay_time_reset = FIRE_DELAY_TIME;
 	fire_delay_time_reset = 40; // temporary
 	uint16_t	fire_delay_overflow = 0; // used if firing period is less than delay time.
+	uint16_t	lpuart_setup_time = 0;
 
 	// button debounce variables
 	uint16_t	button_press_time = 0; 
@@ -52,7 +53,7 @@ int main(void)
 	uint32_t	mechanoreceptor_adapt_count = 0;
 	uint32_t 	mechanoreceptor_adapt_reset = 0;
 
-	message_t	message = 0; // staging variable for constructing messages to send to the communications routine
+	message_t	message; // staging variable for constructing messages to send to the communications routine
 
 	int32_t joegenta = 0;
 
@@ -100,7 +101,7 @@ int main(void)
 			// send a downstream ping every SEND_PING_TIME ticks
 			if (send_ping_time++ > SEND_PING_TIME){
 				// send downstream ping through axon
-				addWrite(DOWNSTREAM_BUFF, DEND_PING);
+				addWrite(DOWNSTREAM_BUFF, downstream_ping_message);
 				send_ping_time = 0;
 			}
 
@@ -226,7 +227,7 @@ int main(void)
 				neuron.state = FIRE;
 				neuron.fire_potential = HYPERPOLARIZATION;
 				neuron.fire_time = PULSE_LENGTH;
-				for (i=0; i<DENDRITE_COUNT; i++){
+				for (i=0; i<NUM_DENDS; i++){
 					neuron.dendrites[i].current_value = 0;
 					neuron.dendrites[i].state = OFF;
 				}

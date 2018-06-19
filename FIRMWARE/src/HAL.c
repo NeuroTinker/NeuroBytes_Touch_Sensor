@@ -79,7 +79,7 @@ void sys_tick_handler(void)
     MMIO32((TIM21_BASE) + 0x10) &= ~(1<<0); //clear the interrupt register
 }
 
-void systick_setup(int xms)
+void systick_setup()
 {
     systick_set_clocksource(STK_CSR_CLKSOURCE_EXT);
     STK_CVR = 0;
