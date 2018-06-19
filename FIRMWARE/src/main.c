@@ -25,6 +25,8 @@
 #define MECHANORECEPTOR_ADAPT_START	35
 #define MECHANORECEPTOR_ADAPT_END	150
 
+#define DBG
+
 int main(void)
 {
 	uint8_t		i;
@@ -62,6 +64,9 @@ int main(void)
 	// initialize neuron
 	neuron_t 	neuron;
 	neuronInit(&neuron);
+
+	neuron.dendrites[0].magnitude = 15000;
+	neuron.dendrites[0].base_magnitude = 15000;
 
 	// initialize communication buffers
 	commInit();
