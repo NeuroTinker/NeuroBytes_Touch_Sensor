@@ -25,7 +25,7 @@
 #define MECHANORECEPTOR_ADAPT_START	35
 #define MECHANORECEPTOR_ADAPT_END	150
 
-#define DBG
+// #define DBG
 
 int main(void)
 {
