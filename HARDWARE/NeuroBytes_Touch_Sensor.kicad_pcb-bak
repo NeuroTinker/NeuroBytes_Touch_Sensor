@@ -1,7 +1,7 @@
 (kicad_pcb (version 4) (host pcbnew 4.0.7-e2-6376~58~ubuntu14.04.1)
 
   (general
-    (links 77)
+    (links 73)
     (no_connects 0)
     (area 44.899999 43.8 175.798574 152.84)
     (thickness 1.6)
@@ -47,7 +47,7 @@
   )
 
   (setup
-    (last_trace_width 0.5)
+    (last_trace_width 0.2)
     (user_trace_width 0.5)
     (user_trace_width 1)
     (trace_clearance 0.2)
@@ -77,7 +77,7 @@
     (grid_origin 91.87 98.74)
     (visible_elements FFFFFF7F)
     (pcbplotparams
-      (layerselection 0x201fc_80000001)
+      (layerselection 0x211fc_80000001)
       (usegerberextensions false)
       (excludeedgelayer true)
       (linewidth 0.100000)
@@ -185,7 +185,6 @@
     (add_net "Net-(U1-Pad28)")
     (add_net "Net-(U1-Pad3)")
     (add_net "Net-(U2-Pad4)")
-    (add_net "Net-(U3-Pad4)")
     (add_net RESET)
     (add_net SWCLK)
     (add_net SWDIO)
