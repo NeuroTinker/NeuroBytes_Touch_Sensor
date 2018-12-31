@@ -179,7 +179,7 @@ int main(void)
 						neuron.dendrites[0].state = ON;
 						neuron.dendrites[0].pulse_time = 0;	
 					}
-					mechanoreceptor_adapt_count++;
+					// mechanoreceptor_adapt_count++;
 					if (mechanoreceptor_adapt_count > mechanoreceptor_adapt_reset) {
 						mechanoreceptor_adapt_count = 0;
 						if (mechanoreceptor_adapt_reset < MECHANORECEPTOR_ADAPT_END) {
