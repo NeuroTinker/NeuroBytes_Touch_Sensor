@@ -1,36 +1,6 @@
-EESchema Schematic File Version 2
-LIBS:power
-LIBS:device
-LIBS:transistors
-LIBS:conn
-LIBS:linear
-LIBS:regul
-LIBS:74xx
-LIBS:cmos4000
-LIBS:adc-dac
-LIBS:memory
-LIBS:xilinx
-LIBS:microcontrollers
-LIBS:dsp
-LIBS:microchip
-LIBS:analog_switches
-LIBS:motorola
-LIBS:texas
-LIBS:intel
-LIBS:audio
-LIBS:interface
-LIBS:digital-audio
-LIBS:philips
-LIBS:display
-LIBS:cypress
-LIBS:siliconi
-LIBS:opto
-LIBS:atmel
-LIBS:contrib
-LIBS:valves
-LIBS:NeuroTinker_schematic_symbols
+EESchema Schematic File Version 4
 LIBS:NeuroBytes_Touch_Sensor-cache
-EELAYER 25 0
+EELAYER 26 0
 EELAYER END
 $Descr B 17000 11000
 encoding utf-8
@@ -45,7 +15,7 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Comp
-L GND #PWR01
+L NeuroBytes_Touch_Sensor-rescue:GND #PWR01
 U 1 1 58B4A894
 P 6200 3850
 F 0 "#PWR01" H 6200 3600 50  0001 C CNN
@@ -60,7 +30,7 @@ Wire Wire Line
 Wire Wire Line
 	5200 3300 6200 3300
 $Comp
-L GND #PWR02
+L NeuroBytes_Touch_Sensor-rescue:GND #PWR02
 U 1 1 58B4A9A5
 P 2200 5850
 F 0 "#PWR02" H 2200 5600 50  0001 C CNN
@@ -71,13 +41,13 @@ F 3 "" H 2200 5850 50  0000 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	2200 5050 2200 5300
+	2200 5050 2200 5200
 Wire Wire Line
-	2200 5600 2200 5850
+	2200 5600 2200 5700
 Text GLabel 1650 1950 0    60   Input ~ 0
 RESET
 Wire Wire Line
-	1650 1950 2800 1950
+	1650 1950 1800 1950
 Text GLabel 5400 2400 2    60   Input ~ 0
 SWCLK
 Wire Wire Line
@@ -103,7 +73,7 @@ A1IN
 Text GLabel 2600 2850 0    60   Input ~ 0
 A1EX
 $Comp
-L LED_RABG D1
+L NeuroBytes_Touch_Sensor-rescue:LED_RABG D1
 U 1 1 58B4B5D1
 P 10900 2550
 F 0 "D1" H 10900 2920 50  0000 C CNN
@@ -136,7 +106,7 @@ LED_G
 Text GLabel 8000 1300 0    60   Input ~ 0
 LED_R
 $Comp
-L GND #PWR03
+L NeuroBytes_Touch_Sensor-rescue:GND #PWR03
 U 1 1 58B4C48D
 P 8850 3750
 F 0 "#PWR03" H 8850 3500 50  0001 C CNN
@@ -147,7 +117,7 @@ F 3 "" H 8850 3750 50  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L +5V #PWR04
+L NeuroBytes_Touch_Sensor-rescue:+5V #PWR04
 U 1 1 58B59B55
 P 11600 1600
 F 0 "#PWR04" H 11600 1450 50  0001 C CNN
@@ -158,7 +128,7 @@ F 3 "" H 11600 1600 50  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L CONN_01X04 P6
+L NeuroBytes_Touch_Sensor-rescue:CONN_01X04 P6
 U 1 1 58B5B32F
 P 14900 1700
 F 0 "P6" H 14900 1950 50  0000 C CNN
@@ -187,17 +157,17 @@ Wire Wire Line
 Wire Wire Line
 	14300 2200 14700 2200
 Wire Wire Line
-	14300 1200 14300 2200
+	14300 1200 14300 1650
 Wire Wire Line
 	14300 1650 14700 1650
 Wire Wire Line
 	14700 2100 14500 2100
 Wire Wire Line
-	14500 1550 14500 2700
+	14500 1550 14500 2100
 Wire Wire Line
 	14500 1550 14700 1550
 $Comp
-L STM32L011Gx U1
+L NeuroBytes_Touch_Sensor-rescue:STM32L011Gx U1
 U 1 1 58B5C156
 P 4000 2400
 F 0 "U1" H 4000 1975 60  0000 C CNN
@@ -214,12 +184,12 @@ F 9 "Yes" H 4000 2400 60  0001 C CNN "RoHS"
 	1    0    0    -1  
 $EndComp
 $Comp
-L LD3985G33R U2
+L NeuroBytes_Touch_Sensor-rescue:LD3985G33R U2
 U 1 1 58B5C9D0
 P 13550 6050
 F 0 "U2" H 13300 6250 50  0000 C CNN
 F 1 "3v3 LDO" H 13750 6250 50  0000 C CNN
-F 2 "TO_SOT_Packages_SMD:TSOT-23-5_HandSoldering" H 13550 6350 50  0000 C CNN
+F 2 "KiCad_Footprints:ZF_SOT23-5L" H 13550 6350 50  0000 C CNN
 F 3 "" H 13550 6050 50  0000 C CNN
 F 4 "ON Semiconductor" H 13550 6050 60  0001 C CNN "Mfr"
 F 5 "NCP114BSN330T1G" H 13550 6050 60  0001 C CNN "Mfr Part #"
@@ -231,7 +201,7 @@ F 9 "Yes" H 13550 6050 60  0001 C CNN "RoHS"
 	1    0    0    -1  
 $EndComp
 $Comp
-L C C1
+L NeuroBytes_Touch_Sensor-rescue:C C1
 U 1 1 58B5CACA
 P 12700 6250
 F 0 "C1" H 12725 6350 50  0000 L CNN
@@ -248,7 +218,7 @@ F 9 "Yes" H 12700 6250 60  0001 C CNN "RoHS"
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	12400 6000 13100 6000
+	12400 6000 12700 6000
 Wire Wire Line
 	12900 6000 12900 6150
 Wire Wire Line
@@ -261,9 +231,9 @@ Wire Wire Line
 Wire Wire Line
 	12700 6600 13550 6600
 Wire Wire Line
-	13550 6350 13550 7050
+	13550 6350 13550 6500
 $Comp
-L +5V #PWR05
+L NeuroBytes_Touch_Sensor-rescue:+5V #PWR05
 U 1 1 58B5CCCF
 P 12400 5800
 F 0 "#PWR05" H 12400 5650 50  0001 C CNN
@@ -275,7 +245,7 @@ F 3 "" H 12400 5800 50  0000 C CNN
 $EndComp
 Connection ~ 12700 6000
 $Comp
-L +5V #PWR06
+L NeuroBytes_Touch_Sensor-rescue:+5V #PWR06
 U 1 1 58B5CECC
 P 14300 1200
 F 0 "#PWR06" H 14300 1050 50  0001 C CNN
@@ -287,7 +257,7 @@ F 3 "" H 14300 1200 50  0000 C CNN
 $EndComp
 Connection ~ 14300 1650
 $Comp
-L GND #PWR07
+L NeuroBytes_Touch_Sensor-rescue:GND #PWR07
 U 1 1 58B5CF99
 P 14500 2700
 F 0 "#PWR07" H 14500 2450 50  0001 C CNN
@@ -299,7 +269,7 @@ F 3 "" H 14500 2700 50  0000 C CNN
 $EndComp
 Connection ~ 14500 2100
 $Comp
-L GND #PWR08
+L NeuroBytes_Touch_Sensor-rescue:GND #PWR08
 U 1 1 58B5D12A
 P 13550 7050
 F 0 "#PWR08" H 13550 6800 50  0001 C CNN
@@ -318,7 +288,7 @@ Wire Wire Line
 	14350 6500 13550 6500
 Connection ~ 13550 6500
 $Comp
-L +3.3V #PWR09
+L NeuroBytes_Touch_Sensor-rescue:+3.3V #PWR09
 U 1 1 58B5D373
 P 14600 5800
 F 0 "#PWR09" H 14600 5650 50  0001 C CNN
@@ -330,7 +300,7 @@ F 3 "" H 14600 5800 50  0000 C CNN
 $EndComp
 Connection ~ 14350 6000
 $Comp
-L +3.3V #PWR010
+L NeuroBytes_Touch_Sensor-rescue:+3.3V #PWR010
 U 1 1 58B5D4CD
 P 2200 5050
 F 0 "#PWR010" H 2200 4900 50  0001 C CNN
@@ -341,7 +311,7 @@ F 3 "" H 2200 5050 50  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L +3.3V #PWR011
+L NeuroBytes_Touch_Sensor-rescue:+3.3V #PWR011
 U 1 1 58B5D568
 P 2000 1000
 F 0 "#PWR011" H 2000 850 50  0001 C CNN
@@ -352,7 +322,7 @@ F 3 "" H 2000 1000 50  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L +3.3V #PWR012
+L NeuroBytes_Touch_Sensor-rescue:+3.3V #PWR012
 U 1 1 58B5D5B2
 P 6200 1050
 F 0 "#PWR012" H 6200 900 50  0001 C CNN
@@ -363,7 +333,7 @@ F 3 "" H 6200 1050 50  0000 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	14000 6000 14600 6000
+	14000 6000 14350 6000
 Wire Wire Line
 	14600 6000 14600 5800
 Wire Wire Line
@@ -379,7 +349,7 @@ Wire Wire Line
 	1900 5200 2200 5200
 Connection ~ 2200 5200
 $Comp
-L GND #PWR013
+L NeuroBytes_Touch_Sensor-rescue:GND #PWR013
 U 1 1 58B5E0E3
 P 9500 7100
 F 0 "#PWR013" H 9500 6850 50  0001 C CNN
@@ -394,7 +364,7 @@ Wire Wire Line
 Wire Wire Line
 	9500 6050 9750 6050
 $Comp
-L +5V #PWR014
+L NeuroBytes_Touch_Sensor-rescue:+5V #PWR014
 U 1 1 58B5E2AE
 P 9300 5550
 F 0 "#PWR014" H 9300 5400 50  0001 C CNN
@@ -425,7 +395,7 @@ Wire Wire Line
 Wire Wire Line
 	8800 6250 9750 6250
 $Comp
-L SW_PUSH SW1
+L NeuroBytes_Touch_Sensor-rescue:SW_PUSH SW1
 U 1 1 58B5A249
 P 5550 5100
 F 0 "SW1" H 5700 5210 50  0000 C CNN
@@ -442,7 +412,7 @@ F 9 "Yes" H 5550 5100 60  0001 C CNN "RoHS"
 	1    0    0    -1  
 $EndComp
 $Comp
-L R R1
+L NeuroBytes_Touch_Sensor-rescue:R R1
 U 1 1 58B5C233
 P 10350 2350
 F 0 "R1" V 10430 2350 50  0000 C CNN
@@ -459,7 +429,7 @@ F 9 "Yes" H 10350 2350 60  0001 C CNN "RoHS"
 	0    1    1    0   
 $EndComp
 $Comp
-L R R2
+L NeuroBytes_Touch_Sensor-rescue:R R2
 U 1 1 58B5C2BE
 P 10350 2550
 F 0 "R2" V 10430 2550 50  0000 C CNN
@@ -476,7 +446,7 @@ F 9 "Yes" H 10350 2550 60  0001 C CNN "RoHS"
 	0    1    1    0   
 $EndComp
 Wire Wire Line
-	8850 1750 8850 3750
+	8850 1750 8850 2550
 Wire Wire Line
 	2000 1000 2000 2100
 Wire Wire Line
@@ -490,7 +460,7 @@ Wire Wire Line
 Text GLabel 2600 3450 0    60   Input ~ 0
 IDENTIFY
 $Comp
-L GND #PWR015
+L NeuroBytes_Touch_Sensor-rescue:GND #PWR015
 U 1 1 58B73CAC
 P 1800 2650
 F 0 "#PWR015" H 1800 2400 50  0001 C CNN
@@ -502,7 +472,7 @@ F 3 "" H 1800 2650 50  0000 C CNN
 $EndComp
 Connection ~ 1800 1950
 $Comp
-L C C5
+L NeuroBytes_Touch_Sensor-rescue:C C5
 U 1 1 58B73F8A
 P 1800 2300
 F 0 "C5" H 1825 2400 50  0000 L CNN
@@ -523,7 +493,7 @@ Wire Wire Line
 Wire Wire Line
 	1800 2150 1800 1950
 $Comp
-L SW_PUSH SW2
+L NeuroBytes_Touch_Sensor-rescue:SW_PUSH SW2
 U 1 1 58D1A180
 P 5550 5850
 F 0 "SW2" H 5700 5960 50  0000 C CNN
@@ -548,7 +518,7 @@ Wire Wire Line
 Text GLabel 5400 3450 2    60   Input ~ 0
 INPUT
 $Comp
-L R R4
+L NeuroBytes_Touch_Sensor-rescue:R R4
 U 1 1 58D1B582
 P 2450 1500
 F 0 "R4" V 2530 1500 50  0000 C CNN
@@ -567,7 +537,7 @@ $EndComp
 Wire Wire Line
 	2800 1500 2600 1500
 $Comp
-L GND #PWR016
+L NeuroBytes_Touch_Sensor-rescue:GND #PWR016
 U 1 1 58D1B6E2
 P 950 2650
 F 0 "#PWR016" H 950 2400 50  0001 C CNN
@@ -582,9 +552,9 @@ Wire Wire Line
 Wire Wire Line
 	950  1500 2300 1500
 Wire Wire Line
-	5000 5100 5000 6350
+	5000 5100 5000 5850
 $Comp
-L GND #PWR017
+L NeuroBytes_Touch_Sensor-rescue:GND #PWR017
 U 1 1 58DA7837
 P 5000 6350
 F 0 "#PWR017" H 5000 6100 50  0001 C CNN
@@ -638,12 +608,12 @@ Wire Wire Line
 Wire Wire Line
 	2600 3450 2800 3450
 $Comp
-L MMBT3904 Q1
+L NeuroBytes_Touch_Sensor-rescue:MMBT3904 Q1
 U 1 1 592F677E
 P 9250 1650
 F 0 "Q1" H 9450 1725 50  0000 L CNN
 F 1 "MMBT3904" V 9250 1850 50  0000 L CNN
-F 2 "TO_SOT_Packages_SMD:SOT-23_Handsoldering" V 9450 1900 50  0001 L CIN
+F 2 "KiCad_Footprints:ZF_SOT23-3L" V 9450 1900 50  0001 L CIN
 F 3 "" H 9250 1650 50  0000 L CNN
 F 4 "Micro Commercial Co" H 9250 1650 60  0001 C CNN "Mfr"
 F 5 "MMBT3904-TP" H 9250 1650 60  0001 C CNN "Mfr Part #"
@@ -657,7 +627,7 @@ $EndComp
 Wire Wire Line
 	9050 1750 8850 1750
 $Comp
-L R R5
+L NeuroBytes_Touch_Sensor-rescue:R R5
 U 1 1 592F68FF
 P 8550 1300
 F 0 "R5" V 8630 1300 50  0000 C CNN
@@ -704,12 +674,12 @@ Wire Wire Line
 Wire Wire Line
 	9950 2750 10200 2750
 $Comp
-L C C2
+L NeuroBytes_Touch_Sensor-rescue:C C2
 U 1 1 592F7BC3
 P 1900 5450
 F 0 "C2" H 1925 5550 50  0000 L CNN
 F 1 "10u" H 1925 5350 50  0000 L CNN
-F 2 "Capacitors_SMD:C_1206_HandSoldering" H 1938 5300 50  0001 C CNN
+F 2 "Capacitors_SMD:C_1206" H 1938 5300 50  0001 C CNN
 F 3 "" H 1900 5450 50  0000 C CNN
 F 4 "Taiyo Yuden" H 1900 5450 60  0001 C CNN "Mfr"
 F 5 "EMK316B7106KL-TD " H 1900 5450 60  0001 C CNN "Mfr Part #"
@@ -725,7 +695,7 @@ Wire Wire Line
 Wire Wire Line
 	9300 6450 9300 5550
 $Comp
-L CONN_01X05 P1
+L NeuroBytes_Touch_Sensor-rescue:CONN_01X05 P1
 U 1 1 598DF7EC
 P 9950 6250
 F 0 "P1" H 9950 6550 50  0000 C CNN
@@ -742,7 +712,7 @@ F 9 "Yes" H 9950 6250 60  0001 C CNN "RoHS"
 	1    0    0    -1  
 $EndComp
 $Comp
-L R R6
+L NeuroBytes_Touch_Sensor-rescue:R R6
 U 1 1 59C58AB7
 P 8550 2100
 F 0 "R6" V 8630 2100 50  0000 C CNN
@@ -759,7 +729,7 @@ F 9 "Yes" H 8550 2100 60  0001 C CNN "RoHS"
 	0    1    1    0   
 $EndComp
 $Comp
-L R R7
+L NeuroBytes_Touch_Sensor-rescue:R R7
 U 1 1 59C58B51
 P 8550 2900
 F 0 "R7" V 8630 2900 50  0000 C CNN
@@ -776,12 +746,12 @@ F 9 "Yes" H 8550 2900 60  0001 C CNN "RoHS"
 	0    1    1    0   
 $EndComp
 $Comp
-L MMBT3904 Q2
+L NeuroBytes_Touch_Sensor-rescue:MMBT3904 Q2
 U 1 1 59C5960F
 P 9250 2450
 F 0 "Q2" H 9450 2525 50  0000 L CNN
 F 1 "MMBT3904" V 9250 2650 50  0000 L CNN
-F 2 "TO_SOT_Packages_SMD:SOT-23_Handsoldering" V 9450 2700 50  0001 L CIN
+F 2 "KiCad_Footprints:ZF_SOT23-3L" V 9450 2700 50  0001 L CIN
 F 3 "" H 9250 2450 50  0000 L CNN
 F 4 "Micro Commercial Co" H 9250 2450 60  0001 C CNN "Mfr"
 F 5 "MMBT3904-TP" H 9250 2450 60  0001 C CNN "Mfr Part #"
@@ -793,12 +763,12 @@ F 9 "Yes" H 9250 2450 60  0001 C CNN "RoHS"
 	0    1    1    0   
 $EndComp
 $Comp
-L MMBT3904 Q3
+L NeuroBytes_Touch_Sensor-rescue:MMBT3904 Q3
 U 1 1 59C59697
 P 9250 3250
 F 0 "Q3" H 9450 3325 50  0000 L CNN
 F 1 "MMBT3904" V 9250 3450 50  0000 L CNN
-F 2 "TO_SOT_Packages_SMD:SOT-23_Handsoldering" V 9450 3500 50  0001 L CIN
+F 2 "KiCad_Footprints:ZF_SOT23-3L" V 9450 3500 50  0001 L CIN
 F 3 "" H 9250 3250 50  0000 L CNN
 F 4 "Micro Commercial Co" H 9250 3250 60  0001 C CNN "Mfr"
 F 5 "MMBT3904-TP" H 9250 3250 60  0001 C CNN "Mfr Part #"
@@ -810,7 +780,7 @@ F 9 "Yes" H 9250 3250 60  0001 C CNN "RoHS"
 	0    1    1    0   
 $EndComp
 $Comp
-L R R3
+L NeuroBytes_Touch_Sensor-rescue:R R3
 U 1 1 59C5990C
 P 10350 2750
 F 0 "R3" V 10430 2750 50  0000 C CNN
@@ -827,7 +797,7 @@ F 9 "Yes" H 10350 2750 60  0001 C CNN "RoHS"
 	0    1    1    0   
 $EndComp
 $Comp
-L CONN_01X04 P7
+L NeuroBytes_Touch_Sensor-rescue:CONN_01X04 P7
 U 1 1 59C59EBF
 P 14900 2250
 F 0 "P7" H 14900 2500 50  0000 C CNN
@@ -844,7 +814,7 @@ F 9 "Yes" H 14900 2250 60  0001 C CNN "RoHS"
 	1    0    0    -1  
 $EndComp
 $Comp
-L C C3
+L NeuroBytes_Touch_Sensor-rescue:C C3
 U 1 1 59C5A256
 P 2200 5450
 F 0 "C3" H 2225 5550 50  0000 L CNN
@@ -861,7 +831,7 @@ F 9 "Yes" H 2200 5450 60  0001 C CNN "RoHS"
 	1    0    0    -1  
 $EndComp
 $Comp
-L C C4
+L NeuroBytes_Touch_Sensor-rescue:C C4
 U 1 1 59C5A4A7
 P 14350 6250
 F 0 "C4" H 14375 6350 50  0000 L CNN
@@ -891,4 +861,30 @@ Text Notes 4850 6750 0    60   ~ 0
 IDENTIFICATION SWITCH AND MECHANORECEPTOR
 Text Notes 9600 3800 0    60   ~ 0
 LED
+Wire Wire Line
+	12900 6000 13100 6000
+Wire Wire Line
+	12700 6000 12900 6000
+Wire Wire Line
+	14300 1650 14300 2200
+Wire Wire Line
+	14500 2100 14500 2700
+Wire Wire Line
+	13550 6600 13550 7050
+Wire Wire Line
+	13550 6500 13550 6600
+Wire Wire Line
+	14350 6000 14600 6000
+Wire Wire Line
+	2200 5700 2200 5850
+Wire Wire Line
+	2200 5200 2200 5300
+Wire Wire Line
+	1800 1950 2800 1950
+Wire Wire Line
+	5000 5850 5000 6350
+Wire Wire Line
+	8850 2550 8850 3350
+Wire Wire Line
+	8850 3350 8850 3750
 $EndSCHEMATC

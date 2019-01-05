@@ -1,0 +1,4 @@
+(sym_lib_table
+  (lib (name NeuroBytes_Touch_Sensor-rescue)(type Legacy)(uri ${KIPRJMOD}/NeuroBytes_Touch_Sensor-rescue.lib)(options "")(descr ""))
+  (lib (name NeuroTinker_schematic_symbols)(type Legacy)(uri ${KIPRJMOD}/NeuroBytes_Schematic_Lib/NeuroTinker_schematic_symbols.lib)(options "")(descr ""))
+)
